@@ -37,7 +37,7 @@
         <div class="apply-section">
           <div class="div">
             <h2>申請交換友鏈</h2>
-            <p><strong>如果你也想交換鏈接。請在你的網站添加本站後，通過<a href="mailto:hosinoeiji@gmail.com">郵件</a>告訴我：</strong></p>
+            <p><strong>如果你也想交換鏈接。請在你的網站添加本站後，通過<a href="mailto:contact@mtf.lgbt">郵件</a>告訴我：</strong></p>
             <ul>
                 <li><strong>名稱：</strong> 我的網站名稱</li>
                 <li><strong>網址：</strong> https://yourdomain.com 或者代表你自己的社交网站主页。</li>

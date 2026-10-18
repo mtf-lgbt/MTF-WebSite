@@ -41,6 +41,19 @@
       "avatar": "https://image.fengying.xin/Image%20hosting/%E6%96%AF%E5%8D%A1%E8%92%82%E5%A4%B4%E5%83%8Fdart.png",
       "desc": "枫莹的双语个人博客、技术笔记与项目展示站点",
       "color": "#89CFF0"
+    },
+    {
+      "url": "https://www.yukinon.cc/",
+      "name": "ユキの隠れ家",
+      "desc": "人間になりたいですわ。",
+      "avatar": "https://www.yukinon.cc/images/avatar.avif"
+    },
+    {
+      "name": "枫书の小站",
+      "url": "https://blog.sfsa.mrgzs.top/",
+      "avatar": "https://q1.qlogo.cn/g?b=qq&nk=3593853319&s=640",
+      "desc": "做伟大事情的唯一方法就是热爱你所做的事",
+      "color": "#3388bb"
     }
   ]
 }

@@ -48,7 +48,7 @@ onMounted(() => {
             <h2>服务</h2>
             <div class="service-grid">
                 <div class="div" fadeUp="true">
-                    <h3>NO COVNERSION THERAPY</h3>
+                    <h3>NO CONVERSION THERAPY</h3>
                     <a href="https://victimsunion.org">官方網站</a> | <a href="/nct">地圖</a>
                 </div>
                 <div class="div" fadeUp="true">

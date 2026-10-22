@@ -2,7 +2,7 @@
   <div  class="blog-container" fadeUp="true">
     <div v-if="!isMobile" style="margin: 50px 0 20px 0;">
         <span class="" style="font-size: 2em; font-weight: bold;">
-            推荐阅读
+            {{ t('routes.blogs.menuView.recommend') }}
         </span>
     </div>
     <div v-if="!isMobile" class="recommend-box">
@@ -22,14 +22,15 @@
     <hr v-if="!isMobile">
     <div style="margin: 50px 0 50px 0;">
         <span class="" style="font-size: 2em; font-weight: bold;">
-            全部文章
+            {{ t('routes.blogs.menuView.allblogs') }}
         </span>
     </div>
     <nav class="tag-filter div">
         <button
             @click="filterByTag(null)" 
             :button="currentTag == id ? '2' : '1'"
-          >全部
+          >
+            {{ t('routes.blogs.tagAll') }}
         </button>
         
         <button
@@ -46,9 +47,9 @@
         <router-link v-for="post in filteredPosts" :key="post.filename" :to="`/blog/${post.filename}`" class="link-card post-card div">
             <h3>{{ post.title }}</h3>
             <div class="meta">
-                <span>作者：{{ post.author }}</span> | 
-                <span>日期：{{ post.CreationDate }}</span> |
-                <span>語言：{{ post.Language }}</span><br>
+                <span>{{ t('routes.blogs.author') }} {{ post.author }}</span> | 
+                <span>{{ t('routes.blogs.releaseDate') }} {{ post.CreationDate }}</span> |
+                <span>{{ t('routes.blogs.language') }} {{ post.Language }}</span><br>
             </div>
             
             <div class="tags">
@@ -58,7 +59,7 @@
             </div>
         </router-link>
 
-        <p v-if="filteredPosts.length === 0">暫無相關內容。</p>
+        <p v-if="filteredPosts.length === 0">{{ t('routes.blogs.NoRelatedAvailable') }}</p>
     </main>
   </div>
 </template>
@@ -69,7 +70,9 @@ import { useRoute, useRouter } from 'vue-router';
 import { fetchBlogData, getFilteredPosts } from '../utils/blogData.js';
 import recommendList from '@/data/recommend.json';
 import { useDeviceType } from '@/utils/isMobie.js'
+import { useI18n } from 'vue-i18n';
 
+const { t } = useI18n();
 const { isMobile, isTablet,isDesktop } = useDeviceType();
 
 const route = useRoute();

@@ -19,6 +19,7 @@
 | 編號 | 功能 | 描述 |
 |---|---|---|
 |1|友情鏈接|在```/public/friends.json```填入友情鏈接的信息后，就可以在 https://domain.com/#/friends 中查看友鏈信息|
+|2|仅文章｜前往```example.com/blogMdOnly/“你要查看的文章”?mdOnly=true```可以仅显示文章内容而不显示网站标题、右边栏等内容。适合在文章中插入<iframe>|
 
 ## 目錄樹
 

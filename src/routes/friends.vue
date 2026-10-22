@@ -3,8 +3,8 @@
     <main class="main">
       <div class="container">
         <div class="header">
-          <h1>友情鏈接</h1>
-          <p>不知道有什么用，可能是免得让人忘记有这些TEANSGENDER的存在吧</p>
+          <h1>{{ t('routes.friends.title') }}</h1>
+          <p>{{ t('routes.friends.subtitle') }}</p>
         </div>
 
         <div class="links-grid div">
@@ -36,28 +36,28 @@
 
         <div class="apply-section">
           <div class="div">
-            <h2>申請交換友鏈</h2>
-            <p><strong>如果你也想交換鏈接。請在你的網站添加本站後，通過<a href="mailto:contact@mtf.lgbt">郵件</a>告訴我：</strong></p>
+            <h2>{{ t('routes.friends.addYourSite.title') }}</h2>
+            <p><strong>{{ t('routes.friends.addYourSite.subtitle') }}<a href="mailto:contact@mtf.lgbt">郵件</a></strong></p>
             <ul>
-                <li><strong>名稱：</strong> 我的網站名稱</li>
-                <li><strong>網址：</strong> https://yourdomain.com 或者代表你自己的社交网站主页。</li>
-                <li><strong>描述：</strong> 一句話介紹你的網站</li>
-                <li><strong>頭像：</strong> 公網可訪問的圖片鏈接</li>
+                <li><strong>{{ t('routes.friends.addYourSite.name') }}</strong> {{ t('routes.friends.addYourSite.notes.name') }}</li>
+                <li><strong>{{ t('routes.friends.addYourSite.url') }}</strong> {{ t('routes.friends.addYourSite.notes.url') }}</li>
+                <li><strong>{{ t('routes.friends.addYourSite.description') }}</strong> {{ t('routes.friends.addYourSite.notes.description') }}</li>
+                <li><strong>{{ t('routes.friends.addYourSite.icon') }}</strong> {{ t('routes.friends.addYourSite.notes.icon') }}</li>
                 <li>
-                    <strong>大頭照顏色</strong> 可以是顏色英文名，或者十六進制顏色代碼。例：<span style="color: white; background-color: #3388bb;">#3388bb</span><br>
+                    <strong>{{ t('routes.friends.addYourSite.color') }}</strong>{{ t('routes.friends.addYourSite.notes.color') }}<span style="color: white; background-color: #3388bb;">#3388bb</span><br>
                     <img src="https://avatars.githubusercontent.com/u/177436503?v=4" style="width: 60px; height: 60px; border-radius: 50%; margin-right: 15px; border: 2px solid #3388bb;">
                 </li>
             </ul>
           </div>
 
           <div class="div">
-            <p><strong>如果想將本站加到您的網站友鏈的話，請將下面資訊加入您的友鏈頁面：</strong></p>
+            <p><strong>{{ t('routes.friends.addThisSite.subtitle') }}</strong></p>
             <ul>
-                <li><strong>名稱：</strong> WEBSITE of EVERY TRANSGENDER PEOPLE.</li>
-                <li><strong>短名称：</strong> <b>MTF.LGBT</b>  (如果您的网站无法显示上面那么又臭又长的名字，请使用这个)</li>
-                <li><strong>網址：</strong> 正式網址<a href="mtf.lgbt">mtf.lgbt</a></li>
-                <li><strong>描述：</strong> A gift for all Transgender community.</li>
-                <li><strong>頭像：</strong> <a src="https://avatars.githubusercontent.com/u/177436503?v=4">https://avatars.githubusercontent.com/u/177436503?v=4</a><br>
+                <li><strong>{{ t('routes.friends.addThisSite.name') }}</strong> {{ t('routes.friends.addThisSite.values.name') }}</li>
+                <li><strong>{{ t('routes.friends.addThisSite.shortName') }}</strong> {{ t('routes.friends.addThisSite.values.shortName') }}</li>
+                <li><strong>{{ t('routes.friends.addThisSite.url') }}</strong> <a href="mtf.lgbt">mtf.lgbt</a></li>
+                <li><strong>{{ t('routes.friends.addThisSite.description') }}</strong> A gift for all Transgender community.</li>
+                <li><strong>{{ t('routes.friends.addThisSite.icon') }}</strong> <a src="https://avatars.githubusercontent.com/u/177436503?v=4">https://avatars.githubusercontent.com/u/177436503?v=4</a><br>
                 <img src="https://avatars.githubusercontent.com/u/177436503?v=4" width="50px" style="border-radius: 50%;"/></li>
             </ul>
           </div>
@@ -68,7 +68,10 @@
 </template>
 
 <script setup>
+import { useI18n } from 'vue-i18n';
 import { ref, onMounted } from 'vue';
+
+const { t } = useI18n();
 
 // 1. 定義響應式資料，初始結構與你的 JSON 一致
 const friendsData = ref({ friends: [] });

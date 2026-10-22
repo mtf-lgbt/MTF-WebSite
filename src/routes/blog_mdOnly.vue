@@ -4,9 +4,9 @@
         <main>
             <h1>{{ route.params.title }}</h1>
             <div class="blog-meta" v-if="post">
-                <span class="meta-item">作者：{{ post.author }}，</span>
-                <span class="meta-item">發布時間：{{ post.CreationDate }}，</span>
-                <span class="meta-item">語言：{{ post.Language }}</span>
+                <span class="meta-item">{{ t('routes.blogs.author') }} {{ post.author }}，</span>
+                <span class="meta-item">{{ t('routes.blogs.releaseDate') }} {{ post.CreationDate }}，</span>
+                <span class="meta-item">{{ t('routes.blogs.language') }} {{ post.Language }}</span>
             </div>
             <div class="markdown-body" v-html="html"></div>
             <div class="comments-container">
@@ -24,8 +24,10 @@ import '../assets/github-markdown-css/github-markdown.css'
 import anchor from 'markdown-it-anchor';
 import toc from 'markdown-it-toc-done-right';
 import { fetchBlogData, getPostByFilename } from '../utils/blogData.js';
-
+import { useI18n } from 'vue-i18n';
 import { useDeviceType } from '../utils/isMobie';
+
+const { t } = useI18n();
 const { isMobile, isTablet } = useDeviceType();
 
 const layoutStyle = computed(() => ({

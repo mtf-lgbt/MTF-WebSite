@@ -3,6 +3,7 @@ import './assets/ctrl.css'
 
 import { createRouter, createWebHistory } from 'vue-router'
 import { createApp } from 'vue'
+import i18n from './i18n/i18n.js'
 import App from './App.vue'
 import Lenis from 'lenis'
 
@@ -92,6 +93,7 @@ const router = createRouter({
 })
 
 app.use(router)//注冊路由
+app.use(i18n)//注冊翻译插件
 app.mount('#app')
 
 console.info('你試試點擊五下副標題呢喵？')

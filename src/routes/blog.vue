@@ -1,8 +1,8 @@
 <template>
     <div class="blog-layout" @click="handleAnchorClick" :style="layoutStyle">
         <aside class="toc-sidebar div" v-if="tocHtml && (!isMobile && !isTablet)" fadeUp="true">
-            <a href="/blog">←查看其它文章</a>
-            <div class="toc-title"><h3>目錄</h3></div>
+            <a href="/blog">{{ t('routes.blogs.viewOtherBlogs') }}</a>
+            <div class="toc-title"><h3>{{ t('routes.blogs.outLine') }}</h3></div>
             <div v-html="tocHtml"></div>
         </aside>
 
@@ -18,9 +18,9 @@
         <main fadeUp="true" class="div">
             <h1>{{ post ? post.title : route.params.title }}</h1>
             <div class="blog-meta" v-if="post">
-                <span class="meta-item">作者：{{ post.author }}，</span>
-                <span class="meta-item">發布時間：{{ post.CreationDate }}，</span>
-                <span class="meta-item">語言：{{ post.Language }}</span>
+                <span class="meta-item">{{ t('routes.blogs.author') }} {{ post.author }}，</span>
+                <span class="meta-item">{{ t('routes.blogs.releaseDate') }} {{ post.CreationDate }}，</span>
+                <span class="meta-item">{{ t('routes.blogs.language') }} {{ post.Language }}</span>
             </div>
             <div class="markdown-body" v-html="html"></div>
             <div class="comments-container">
@@ -53,8 +53,10 @@ import '../assets/github-markdown-css/github-markdown.css'
 import anchor from 'markdown-it-anchor';
 import toc from 'markdown-it-toc-done-right';
 import { fetchBlogData, getPostByFilename } from '../utils/blogData.js';
-
 import { useDeviceType } from '../utils/isMobie';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 const { isMobile, isTablet } = useDeviceType();
 
 const layoutStyle = computed(() => ({

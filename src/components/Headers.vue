@@ -1,6 +1,9 @@
 <script setup>
 import { useDeviceType } from '../utils/isMobie';
 import { ref, onMounted, onUnmounted } from 'vue';
+import { useI18n } from 'vue-i18n'
+const { t, locale } = useI18n()
+
 const { isMobile, isTablet } = useDeviceType();
 
 //有機會給他嗎的改掉
@@ -55,23 +58,24 @@ onUnmounted(() => {
         </a>
         <page v-if="!isMobile" fadeUp="true">
             <transition name="fade" mode="out-in">
-                <a v-if="topheadrer == true" href="/">首頁</a>
-                <a v-else href="#" @click.prevent="scrollToTop" button="1">回到頂部</a>
+                <a v-if="topheadrer == true" href="/">{{ $t('components.header.home') }}</a>
+                <a v-else href="#" @click.prevent="scrollToTop" button="1">{{ $t('components.header.backToTop') }}</a>
             </transition>
-            <a href="/friends">友情鏈接</a>
-            <a href="/about">關於本站</a>
-            <a href="/blog">文章</a>
-            <!--<a @click="openSettingMenu">個人化</a>-->
+            <a href="/friends">{{ $t('components.header.friends') }}</a>
+            <a href="/about">{{ $t('components.header.about') }}</a>
+            <a href="/blog">{{ $t('components.header.blogs') }}</a>
+            <a @click="openSettingMenu">{{ $t('components.header.setting') }}</a>
         </page>
         <div class="rtmod" v-else fadeUp="true">
             <button @click="openList" id="openListBtn" button="2">...</button>
         </div>
     </div>
     <div class="div mobile-menu" id="mobileMenu" v-if="!isTablet">
-        <a href="/">首頁</a>
-        <a href="/friends">友情鏈接</a>
-        <a href="/about">關於本站</a>
-        <a href="/blog">文章</a>
+        <a href="/">{{ $t('components.header.home') }}</a>
+        <a href="/friends">{{ $t('components.header.friends') }}</a>
+        <a href="/about">{{ $t('components.header.about') }}</a>
+        <a href="/blog">{{ $t('components.header.blogs') }}</a>
+        <a @click="openSettingMenu">{{ $t('components.header.setting') }}</a>
     </div>
 </template>
 <style scoped>

@@ -1,48 +1,66 @@
 <template>
-    <div class="settingPage div" id="settingPage">
-        <button id="closeBtn" button="2" @click="toggleMenu">關閉</button>
-        <div class="settingPanel">
-            <h2>個人化選項</h2>
-            <div class="settingGroup">
-                <label>Banner显示高度</label>
-                <div class="sizeButtons">
-                    <button button="2" @click="setBannerHeight('all')">Full Screen</button>
-                    <button button="2" @click="setBannerHeight('half')">Half Screen</button>
-                    <button button="2" @click="setBannerHeight('none')">None</button>
+    <transition name="setting">
+        <div class="settingPage div" id="settingPage" v-show="isOpen">
+            <button id="closeBtn" button="2" @click="closeMenu">關閉</button>
+            <div class="settingPanel">
+                <h2>{{ $t('components.setting.title') }}</h2>
+                <div class="settingGroup">
+                    <label>{{ $t('components.setting.language') }}</label>
+                    <div class="sizeButtons">
+                        <button
+                            v-for="lang in langs"
+                            :key="lang.code"
+                            @click="switchLang(lang.code)"
+                            :button="locale === lang.code ? '2' : '1'"
+                        >
+                            {{ lang.label }}
+                        </button>
+                    </div>
                 </div>
             </div>
-
-
-
-
-
-
-
         </div>
-    </div>
+    </transition>
 </template>
+
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
+import { useI18n } from 'vue-i18n'
+import Cookies from 'js-cookie'
 
-const toggleMenu = () => {
-    const isOpen=document.getElementById('settingPage')
-    const isHidden = isOpen.style.opacity == 0;
+const { locale } = useI18n()
 
-    // 如果当前是隐藏的，就显示并开启交互；否则隐藏并禁用交互
-    isOpen.style.opacity = isHidden ? 1 : 0;
-    isOpen.style.pointerEvents = isHidden ? 'auto' : 'none';
+const isOpen = ref(false)
+
+const toggleMenu = () => { isOpen.value = !isOpen.value }
+const closeMenu  = () => { isOpen.value = false }
+
+// 语言切换相关
+const COOKIE_KEY = 'locale'
+const COOKIE_OPTS = { expires: 365, sameSite: 'Lax', path: '/' }
+
+const langs = [
+    { code: 'zhcn', label: '简体中文' },
+    { code: 'enus', label: 'English' },
+    { code: 'ja',   label: '日本語' }
+]
+const switchLang = (code) => {
+    locale.value = code, // 切换语言
+    Cookies.set(COOKIE_KEY, code, COOKIE_OPTS) // 保存到 Cookie
 }
 
 onMounted(() => {
-    // 监听全局自定义事件，不管是 Header 还是谁发出的，都能接收
+    // 读取 cookie，校验合法性后恢复
+    const saved = Cookies.get(COOKIE_KEY)
+    if (saved && langs.some(l => l.code === saved)) {
+        locale.value = saved
+    }
     window.addEventListener('toggle-setting-menu', toggleMenu)
 })
-
 onUnmounted(() => {
-    // 组件销毁时移除监听，防止内存泄漏
     window.removeEventListener('toggle-setting-menu', toggleMenu)
 })
 </script>
+
 <style scoped>
 .settingPage{
     position: fixed;
@@ -50,13 +68,9 @@ onUnmounted(() => {
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 100000000;
-
     width: 50%;
     height: 50%;
-    opacity: 0;
-    pointer-events: none;
-
-    transition: all 0.4s ease;
+    padding: 20px;
 }
 .settingPanel{
     display: grid;
@@ -78,19 +92,13 @@ onUnmounted(() => {
     min-width: 100px;
     white-space: nowrap;
 }
-.settingGroup select,
-.settingGroup .sizeButtons,
-.settingGroup .toggleRow{
+.settingGroup .sizeButtons{
     flex: 1 1 0;
     min-width: 180px;
-}
-.sizeButtons,
-.toggleRow{
     display: flex;
     gap: 8px;
 }
-.sizeButtons button,
-.toggleRow button{
+.sizeButtons button{
     flex: 1 1 auto;
 }
 #closeBtn{
@@ -99,4 +107,9 @@ onUnmounted(() => {
     top: 20px;
     z-index: 10001;
 }
+/* 进出场动画 */
+.setting-enter-active,
+.setting-leave-active { transition: all .3s ease; }
+.setting-enter-from,
+.setting-leave-to { opacity: 0; transform: translate(-50%, -45%); }
 </style>

@@ -1,7 +1,7 @@
 import { createI18n } from 'vue-i18n';
 //import enus from './en.js'
 import zhcn from './zh-cn/master.js'
-//import ja from './ja.js'
+import ja from './ja/master.js'
 const i18n = createI18n({
     legacy: false,
     locale: 'zhcn', // 默认语言
@@ -10,7 +10,7 @@ const i18n = createI18n({
     globalInjection: true, // 允许在模板中直接使用 $t
     messages: {
         zhcn,
-        //ja
+        ja
         //enus
     },
 });

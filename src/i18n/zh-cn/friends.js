@@ -14,7 +14,7 @@ const friends = {
         notes: {
             name: '你的网站名称',
             url: 'https://yourdomain.com 或者代表你自己的社交网站主页',
-            description: '你的网站的简短描述',
+            description: '你的网站的简短描述或者副标题',
             icon: '公网可访问的图片链接',
             color: '可以是颜色英文名，或者十六进制颜色代码。例：',
         }

@@ -1,15 +1,13 @@
 <template>
     <div @click="handleAnchorClick" :style="layoutStyle">
         <!-- 侧边栏 TOC -->
-        <aside class="toc-sidebar" v-if="!isMobile && !isTablet">
-            <m3e-content-pane>
+        <m3e-content-pane class="toc-sidebar" v-if="!isMobile && !isTablet">
                 <a href="/blog">{{ t('routes.blogs.viewOtherBlogs') }}</a>
                 <m3e-toc for="article-content" max-depth="3">
                     <span>{{ t('routes.blogs.outLine') }}</span>
                 </m3e-toc>
-            </m3e-content-pane>
-        </aside>
-
+        </m3e-content-pane>
+        <!--
         <transition name="fade" mode="out-in">
         <aside class="toc-sidebar div toc-mobile" v-if="isMobile" fadeUp="true">
             <button class="toc-mobile-switch" @click="toggleMobileTOC">
@@ -22,6 +20,7 @@
             </div>
         </aside>
         </transition>
+        -->
 
         <m3e-content-pane fadeUp="true">
             <h1>{{ post ? post.title : route.params.title }}</h1>

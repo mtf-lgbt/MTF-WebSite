@@ -1,6 +1,9 @@
 <script setup>
 import { onMounted, onUnmounted } from 'vue'
 import { useTextAnime } from '@/utils/textAnime'
+import "@m3e/web/button";
+import "@m3e/web/split-button";
+import "@m3e/web/callout";
 
 const {
     setup,
@@ -18,24 +21,37 @@ onMounted(() => {
 })
 </script>
 <template>
-    <div fadeUp="true">
-        <div class="div">
+    <m3e-content-pane fadeUp="true">
+        <div>
             <h2>距离第二年续费还差62.2$</h2>
             <p>对跨性别者这么重要的一个域名，竟然只需要<b style="font-size: 1.2em;">62.2美元</b>！台下观众一片欢呼，<b>62.2$！62.2$！</b></p>
             <p>但是！<br>这么点破钱，站长竟然彻夜未眠！</p>
             <p>所以各位，如果不想让这个域名落到跨圈神人那里，就求求阁下们给我点钱吧（大哭）</p>
-            <a href="/Spons" button="2" class="Spons thisButton">赞助我！</a>
+            <m3e-button variant="filled" href="/Spons">赞助我！</m3e-button>
         </div>
 
-        <div class="div">
+        <div>
             <h2>訂閲</h2>
             <p>點擊可以訂閲我的文章，當我有新的文章時會通知你</p>
-            <a href="https://forms.gle/v3Q9DCPZLApLHkFn8" button="2">訂閲</a>
+            <m3e-callout variant="tertiary">
+                <m3e-icon slot="icon" name="info"></m3e-icon>
+                <span slot="label">注意！</span>
+                <span>目前邮箱订阅因部分原因正在维修，暂时无法提供订阅服务。但是订阅申请仍然可以提交，在修复完成后会继续为您提供订阅服务。</span>
+                <!-- Context omitted for brevity -->
+            </m3e-callout>
+            <m3e-button variant="filled" href="https://forms.gle/v3Q9DCPZLApLHkFn8" button="2">邮箱订阅</m3e-button>
             <p>如果你沒有Google帳號，可以通過以下方式訂閲：</p>
-            <a href="https://forms.cloud.microsoft/r/uDGJST7hLt" button="1">訂閲</a> <a href="/rss.xml">RSS訂閲</a>
+            <m3e-button-group style="justify-content: left;">
+                <m3e-button href="https://forms.cloud.microsoft/r/uDGJST7hLt" variant="tonal">
+                        <m3e-icon slot="icon" name="mail"></m3e-icon>邮箱订阅
+                </m3e-button>
+                <m3e-button href="/rss.xml" variant="tonal">
+                    <m3e-icon slot="icon" name="rss_feed"></m3e-icon>RSS订阅
+                </m3e-button>
+            </m3e-button-group>
         </div>
 
-        <div class="div">
+        <div>
             <h2>投稿</h2>
             <p>你可以在这里投稿你写的文章，也可以在网站副标题中写一句关于你的话。
                 至于你要投稿文章还是别的东西，只需要在相应的问题中填写就可以了。所
@@ -44,22 +60,23 @@ onMounted(() => {
             button="2" class="thisButton">投稿</a>
         </div>
 
-        <div class="div">
+        <div>
             <h2>服务</h2>
             <div class="service-grid">
-                <div class="div" fadeUp="true">
-                    <h3>NO CONVERSION THERAPY</h3>
-                    <a href="https://victimsunion.org">官方網站</a> | <a href="/nct">地圖</a>
-                </div>
-                <div class="div" fadeUp="true">
-                    <h3>@MTF.LGBT MAIL</h3>
-                    <p>MTF.LGBT邮箱，跨性别者自己的邮箱</p>
-                    <a href="https://mail.mtf.lgbt/login">登录 | 注册</a>
-                </div>
+                <m3e-card actionable fadeUp="true">
+                    <h3 slot="header">NO CONVERSION THERAPY</h3>
+                    <p slot="content">
+                        <a href="https://victimsunion.org">官方網站</a> | <a href="/nct">地圖</a>
+                    </p>
+                </m3e-card>
+                <m3e-card actionable href="https://mail.mtf.lgbt/login">
+                    <h3 slot="header">@MTF.LGBT MAIL</h3>
+                    <p slot="content">MTF.LGBT邮箱，跨性别者自己的邮箱</p>
+                </m3e-card>
             </div>
             
         </div>
-    </div>
+    </m3e-content-pane>
 </template>
 <style scoped>
 .title_2 {

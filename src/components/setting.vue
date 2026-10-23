@@ -1,24 +1,24 @@
 <template>
     <transition name="setting">
-        <div class="settingPage div" id="settingPage" v-show="isOpen">
-            <button id="closeBtn" button="2" @click="closeMenu">關閉</button>
-            <div class="settingPanel">
-                <h2>{{ $t('components.setting.title') }}</h2>
+        <m3e-dialog dismissible id="settingPage">
+                <span slot="header">{{ $t('components.setting.title') }}</span>
                 <div class="settingGroup">
-                    <label>{{ $t('components.setting.language') }}</label>
-                    <div class="sizeButtons">
-                        <button
+                    <label>
+                        <m3e-icon slot="icon" name="globe"></m3e-icon>
+                        {{ $t('components.setting.language') }}
+                    </label>
+                    <m3e-segmented-button>
+                        <m3e-button-segment
                             v-for="lang in langs"
                             :key="lang.code"
                             @click="switchLang(lang.code)"
-                            :button="locale === lang.code ? '2' : '1'"
+                            :checked="locale === lang.code"
                         >
                             {{ lang.label }}
-                        </button>
-                    </div>
+                        </m3e-button-segment>
+                    </m3e-segmented-button>
                 </div>
-            </div>
-        </div>
+        </m3e-dialog>
     </transition>
 </template>
 
@@ -26,6 +26,8 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import Cookies from 'js-cookie'
+import "@m3e/web/segmented-button";
+import "@m3e/web/dialog";
 
 const { locale } = useI18n()
 
@@ -62,25 +64,6 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-.settingPage{
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 100000000;
-    width: 50%;
-    height: 50%;
-    padding: 20px;
-}
-.settingPanel{
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 20px;
-}
-.settingPanel h2{
-    grid-column: 1 / -1;
-    margin: 0 0 16px;
-}
 .settingGroup{
     display: flex;
     flex-wrap: wrap;
@@ -92,24 +75,4 @@ onUnmounted(() => {
     min-width: 100px;
     white-space: nowrap;
 }
-.settingGroup .sizeButtons{
-    flex: 1 1 0;
-    min-width: 180px;
-    display: flex;
-    gap: 8px;
-}
-.sizeButtons button{
-    flex: 1 1 auto;
-}
-#closeBtn{
-    position: fixed;
-    right: 20px;
-    top: 20px;
-    z-index: 10001;
-}
-/* 进出场动画 */
-.setting-enter-active,
-.setting-leave-active { transition: all .3s ease; }
-.setting-enter-from,
-.setting-leave-to { opacity: 0; transform: translate(-50%, -45%); }
 </style>

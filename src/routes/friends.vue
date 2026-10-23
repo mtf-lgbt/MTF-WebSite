@@ -2,40 +2,39 @@
   <div class="friends-page" fadeUp="true">
     <main class="main">
       <div class="container">
-        <div class="header">
+        <m3e-content-pane>
           <h1>{{ t('routes.friends.title') }}</h1>
           <p>{{ t('routes.friends.subtitle') }}</p>
-        </div>
 
-        <div class="links-grid div">
-          <a 
-            v-for="friend in friendsData.friends" 
-            :key="friend.url" 
-            :href="friend.url" 
-            target="_blank" 
-            class="link-card"
-          >
-            <img 
-              :src="friend.avatar" 
-              :style="{ borderColor: friend.color || '#3388bb' }"
-              class="friend-avatar"
-              alt="avatar"
+          <div class="links-grid">
+            <m3e-card actionable
+              v-for="friend in friendsData.friends" 
+              :key="friend.url" 
+              :href="friend.url" 
+              target="_blank" 
             >
-            
-            <div class="info">
-              <h3 style="color: '#111827'">
-                {{ friend.name }}
-              </h3>
+              <img 
+                :src="friend.avatar" 
+                
+                class="friend-avatar"
+                slot="header"
+                alt="avatar"
+              >
               
-              <p v-if="friend.desc" class="desc">
-                {{ friend.desc }}
-              </p>
-            </div>
-          </a>
-        </div>
+                <h3 slot="header"
+                :style="{ color: friend.color || '#3388bb' }">
+                  {{ friend.name }}
+                </h3>
+                
+                <p slot="content" v-if="friend.desc" class="desc">
+                  {{ friend.desc }}
+                </p>
+            </m3e-card>
+          </div>
+        </m3e-content-pane>
 
-        <div class="apply-section">
-          <div class="div">
+        <m3e-content-pane>
+          <div>
             <h2>{{ t('routes.friends.addYourSite.title') }}</h2>
             <p><strong>{{ t('routes.friends.addYourSite.subtitle') }}<a href="mailto:contact@mtf.lgbt">郵件</a></strong></p>
             <ul>
@@ -50,7 +49,7 @@
             </ul>
           </div>
 
-          <div class="div">
+          <div>
             <p><strong>{{ t('routes.friends.addThisSite.subtitle') }}</strong></p>
             <ul>
                 <li><strong>{{ t('routes.friends.addThisSite.name') }}</strong> {{ t('routes.friends.addThisSite.values.name') }}</li>
@@ -61,7 +60,7 @@
                 <img src="https://avatars.githubusercontent.com/u/177436503?v=4" width="50px" style="border-radius: 50%;"/></li>
             </ul>
           </div>
-        </div>
+        </m3e-content-pane>
       </div>
     </main>
   </div>
@@ -103,21 +102,11 @@ onMounted(() => {
 /* 網格系統 */
 .links-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   gap: 20px;
 }
 
 
-/* 頭像樣式 */
-.friend-avatar {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  margin-right: 15px;
-  border-width: 2px;
-  border-style: solid;
-  object-fit: cover;
-}
 
 .info h3 {
   margin: 0;

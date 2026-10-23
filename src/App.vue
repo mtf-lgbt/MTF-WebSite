@@ -10,6 +10,7 @@ import setting from './components/setting.vue';
 import { ref, computed, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useDeviceType } from './utils/isMobie';
+import "@m3e/web/theme"
 const { isMobile, isTablet,isDesktop } = useDeviceType();
 
 const route = useRoute()
@@ -27,19 +28,21 @@ onMounted(() => {
 </script>
 
 <template>
-    <div v-if="!queryType">
-        <setting />
-        <Headers />
-        <Banne />
-        <main class="content" :style="mainStyle">
-            <div class="left"><router-view /></div>
-            <statusForRt />
-        </main>
-        <Foot />
-    </div>
-    <div v-else>
-        <router-view />
-    </div>
+    <m3e-theme color="#14ff4f" scheme="auto">
+        <div v-if="!queryType">
+            <setting />
+            <Headers />
+            <Banne />
+            <main class="content" :style="mainStyle">
+                <div class="left"><router-view /></div>
+                <statusForRt />
+            </main>
+            <Foot />
+        </div>
+        <div v-else>
+            <router-view />
+        </div>
+    </m3e-theme>
 </template>
 
 <style scoped>

@@ -1,14 +1,10 @@
 <template>
     <div class="statusRtDiv" :style="RtDivStyle" fadeUp="true">
-        <survivalTime />
-        <HRTdays />
         <allLinks />
     </div>
 </template>
 <script setup>
-import survivalTime from './tools/survivalTime.vue';
 import allLinks from './tools/allLinks.vue'
-import HRTdays from './tools/HRTdays.vue';
 import { computed } from 'vue';
 import { useDeviceType } from '../utils/isMobie';
 

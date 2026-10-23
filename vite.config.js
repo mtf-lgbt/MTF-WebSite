@@ -9,7 +9,14 @@ import viteString from 'vite-plugin-string'
 export default defineConfig(({ command }) => {
   return {
     plugins: [
-      vue(),
+      vue({
+        template: {
+          compilerOptions: {
+            // 将所有以 m3e- 开头的标签视为自定义元素
+            isCustomElement: (tag) => tag.startsWith('m3e-')
+          }
+        }
+      }),
       vueDevTools(),
       viteString({
         include: '**/*.md'

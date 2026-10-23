@@ -1,48 +1,45 @@
 <script setup>
-import { useDeviceType } from '../utils/isMobie';
 import { ref, onMounted, onUnmounted } from 'vue';
-import { useI18n } from 'vue-i18n'
-const { t, locale } = useI18n()
+import "@m3e/web/nav-bar";
+import "@m3e/web/icon";
+import "@m3e/web/dialog";
 
-const { isMobile, isTablet } = useDeviceType();
 
-//有機會給他嗎的改掉
-const openList = () => {
-    const menu = document.getElementById('mobileMenu');
-    if (!menu) return;
-    menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
-    menu.style.animation = 'fadeIn 0.3s';
-};
 
-const topheadrer = ref(true);
-
-const handleScroll = () => {
-    const header = document.querySelector('.header');
-    if (!header) return;
-
-    if (window.scrollY === 0) {
-        //header.style.backgroundColor = 'var(--card-bg)';
-        header.classList.remove('div');
-        topheadrer.value = true;
-    } else {
-        //header.style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
-        header.classList.add('div');
-        topheadrer.value = false;
-    }
-};
-
-const openSettingMenu = () => {
-    // 抛出一个全局事件
-    window.dispatchEvent(new CustomEvent('toggle-setting-menu'));
-};
+const topheadrer = ref(true); 
+const scrollDirection = ref('up'); // 用来记录方向：'down'（下滑） 或 'up'（上滑）
+let lastScrollY = 0;
+let ticking = false;
 
 const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 };
 
+const handleScroll = () => {
+    if (!ticking) {
+        window.requestAnimationFrame(() => {
+            const currentScrollY = window.scrollY;
+            
+            // 1. 判断滚动方向（加一个阈值判断，避免微小抖动）
+            if (currentScrollY > lastScrollY) {
+                scrollDirection.value = 'down'; // 往下滚
+            } else if (currentScrollY < lastScrollY - 5) {
+                scrollDirection.value = 'up';   // 往上滚
+            }
+
+            // 2. 判断是否在顶部
+            topheadrer.value = currentScrollY === 0;
+            
+            // 更新上一次的滚动位置
+            lastScrollY = currentScrollY;
+            ticking = false;
+        });
+        ticking = true;
+    }
+};
+
 onMounted(() => {
-    window.addEventListener('scroll', handleScroll);
-    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
 });
 
 onUnmounted(() => {
@@ -51,83 +48,89 @@ onUnmounted(() => {
 </script>
 <template>
     <div class="header">
-        <a href="/" class="icon" fadeUp="true">
-            <img :src="$HeadImageX64px"/>
-            <span v-if="!isMobile"><b>MTF.LGBT | for EVERY TRANSGENDER PEOPLE</b></span>
-            <span v-else><b>MTF.LGBT</b></span>
-        </a>
-        <page v-if="!isMobile" fadeUp="true">
-            <transition name="fade" mode="out-in">
-                <a v-if="topheadrer == true" href="/">{{ $t('components.header.home') }}</a>
-                <a v-else href="#" @click.prevent="scrollToTop" button="1">{{ $t('components.header.backToTop') }}</a>
+        <m3e-nav-bar mode="auto">
+            
+            <transition
+                :name="scrollDirection === 'down' ? 'slide-up' : 'slide-down'"
+                mode="out-in"
+            >
+                <m3e-nav-item 
+                    v-if="topheadrer == true" 
+                    href="/"
+                >
+                    <m3e-icon slot="icon" name="home"></m3e-icon>
+                    {{ $t('components.header.home') }}
+                </m3e-nav-item>
+                <m3e-nav-item 
+                    v-else
+                    @click.prevent="scrollToTop"
+                >
+                    <m3e-icon slot="icon" name="arrow_upward"></m3e-icon>
+                    {{ $t('components.header.backToTop') }}
+                </m3e-nav-item>
             </transition>
-            <a href="/friends">{{ $t('components.header.friends') }}</a>
-            <a href="/about">{{ $t('components.header.about') }}</a>
-            <a href="/blog">{{ $t('components.header.blogs') }}</a>
-            <a @click="openSettingMenu">{{ $t('components.header.setting') }}</a>
-        </page>
-        <div class="rtmod" v-else fadeUp="true">
-            <button @click="openList" id="openListBtn" button="2">...</button>
-        </div>
-    </div>
-    <div class="div mobile-menu" id="mobileMenu" v-if="!isTablet">
-        <a href="/">{{ $t('components.header.home') }}</a>
-        <a href="/friends">{{ $t('components.header.friends') }}</a>
-        <a href="/about">{{ $t('components.header.about') }}</a>
-        <a href="/blog">{{ $t('components.header.blogs') }}</a>
-        <a @click="openSettingMenu">{{ $t('components.header.setting') }}</a>
+            <m3e-nav-item href="/friends">
+                <m3e-icon slot="icon" name="group"></m3e-icon>
+                {{ $t('components.header.friends') }}
+            </m3e-nav-item>
+            <m3e-nav-item href="/about">
+                <m3e-icon slot="icon" name="info"></m3e-icon>
+                {{ $t('components.header.about') }}
+            </m3e-nav-item>
+            <m3e-nav-item href="/blog">
+                <m3e-icon slot="icon" name="article"></m3e-icon>
+                {{ $t('components.header.blogs') }}
+            </m3e-nav-item>
+            <m3e-nav-item variant="filled">
+                <m3e-icon slot="icon" name="settings"></m3e-icon>
+                <m3e-dialog-trigger for="settingPage">
+                    {{ $t('components.header.setting') }}
+                </m3e-dialog-trigger>
+            </m3e-nav-item>
+        </m3e-nav-bar>
     </div>
 </template>
 <style scoped>
 .header{
-    padding: 1em 2em;
-    font-size: 18px;
     z-index: 100;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    top: 0;
     position: sticky;
-    top: 1em;
     transition: all 0.5s ease;
 }
-.header > * {
-    margin: 0 1em;
-}
-.header img {
-    height: 1.5em;
-    width: auto;
-    margin-right: 0.5em;
-    vertical-align: middle;
-    border-radius: 50%;
-}
-.header .icon {
-    /*margin-right: auto;*/
-    text-decoration: none;
-}
-.header .rtmod{
-    margin-left: auto;
-}
-/*
-.header > :not(.icon,.rtmod){
-    position:absolute
-}
-    */
-.header page a{
-    margin: 0 20px;
-}
-.mobile-menu {
-    display: none;
-    flex-direction: column;
+
+m3e-nav-item {
+  min-width: 0; /* 允许 flex 子项收缩 */
 }
 
 
-.fade-enter-active,
-.fade-leave-active {
-    transition: all 0.3s ease;
+
+
+
+/* 页面下滑时：元素向上滑出/滑入 */
+.slide-up-enter-active,
+.slide-up-leave-active {
+    transition: all 0.15s ease;
 }
-.fade-enter-from,
-.fade-leave-to {
+.slide-up-enter-from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(50%); /* 从下方进来 */
+}
+.slide-up-leave-to {
+    opacity: 0;
+    transform: translateY(-50%); /* 向上方出去 */
+}
+
+/* 页面上滑时：元素向下滑出/滑入 */
+.slide-down-enter-active,
+.slide-down-leave-active {
+    transition: all 0.15s ease;
+}
+.slide-down-enter-from {
+    opacity: 0;
+    transform: translateY(-50%); /* 从上方进来 */
+}
+.slide-down-leave-to {
+    opacity: 0;
+    transform: translateY(50%); /* 向下方出去 */
 }
 </style>

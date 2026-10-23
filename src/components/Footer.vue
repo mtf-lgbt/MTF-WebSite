@@ -1,6 +1,7 @@
 <script setup>
 import { useDeviceType } from '../utils/isMobie';
 import {useI18n} from 'vue-i18n'
+import "@m3e/web/avatar";
 const { t, locale } = useI18n()
 const { isMobile, isTablet } = useDeviceType();
 </script>

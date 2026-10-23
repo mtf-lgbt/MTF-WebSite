@@ -19,13 +19,12 @@ onMounted(() => {
 </script>
 <template>
     <div fadeUp="true">
-        <div>
-            <h1 class="title_2">Ciallo! I'm HosinoNeko!</h1>
-        </div>
         <div class="div">
-            <h2>自介</h2>
-            <p>真的好高興你可以看到這個網站，我是HosinoNeko，一名中國内地的跨性別者。</p>
-            <p>有關我的具體故事請看<a href="/Blog/星野寧子的回憶錄">這篇文章</a></p>
+            <h2>距离第二年续费还差62.2$</h2>
+            <p>对跨性别者这么重要的一个域名，竟然只需要<b style="font-size: 1.2em;">62.2美元</b>！台下观众一片欢呼，<b>62.2$！62.2$！</b></p>
+            <p>但是！<br>这么点破钱，站长竟然彻夜未眠！</p>
+            <p>所以各位，如果不想让这个域名落到跨圈神人那里，就求求阁下们给我点钱吧（大哭）</p>
+            <a href="/Spons" button="2" class="Spons thisButton">赞助我！</a>
         </div>
 
         <div class="div">
@@ -36,32 +35,29 @@ onMounted(() => {
             <a href="https://forms.cloud.microsoft/r/uDGJST7hLt" button="1">訂閲</a> <a href="/rss.xml">RSS訂閲</a>
         </div>
 
-
-
         <div class="div">
-            <h2>PROJECTS</h2>
-            <p>NO COVNERSION THERAPY</p>
-            <a href="https://victimsunion.org">官方網站</a> | <a href="/nct">地圖</a>
+            <h2>投稿</h2>
+            <p>你可以在这里投稿你写的文章，也可以在网站副标题中写一句关于你的话。
+                至于你要投稿文章还是别的东西，只需要在相应的问题中填写就可以了。所
+                有内容都会经过站长审核后才能公布</p>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSeY2gRg201I-07NlbR-Nu6BNKL_zvaR71lJsMqUmcR8ZXOHSA/viewform?usp=header" 
+            button="2" class="thisButton">投稿</a>
         </div>
 
         <div class="div">
-            <h2>經歷</h2>
-            <p>曾經因爲跨性別者身份被送進戒網癮學校</p>
-            <p>逃出來之後建立了NO CONVERSION THERAPY網站</p>
-            <p>之後在警察威脅下關閉了網站。</p>
-        </div>
-
-        <div class="div">
-            <h2>推薦文章</h2>(全部文章請看<a href="/#/blog">這裏</a>)
-            <p><a href="/blog/星野寧子的回憶錄">星野寧子的回憶錄</a></p>
-        </div>
-
-        <div class="div">
-            <h2>自保宣言</h2>
-            <p>若出现意外情况再次被送进戒網癮學校，知道我具体个人信息的同志请拿此宣言给予公安机关</p>
-            我，{真实名称}，18嵗以上，在這裏宣告，我明確反對任何形式的包括但不限於“扭轉”、“矯正”、“戒網癮”等學校或管理措施。任何人，包括我的父母或法定監護人，沒有任何權利，限制我的人身自由、通信自由等。任何移交監護權的做法都不會在我這裏得到認可。其相關協議應當依據民法典予以廢除。任何人，包括我的父母或法定監護人，在對我實行上述行爲后，我和經過我授權的人都有權利通過包括暴力在内的任何手段奪回我的權利。
-
-            本宣告無截止時間，只要是一個法定自然人擁有本宣告，并且在本人簽名上有對應自然人的法定姓名，即可以視爲授權人，擁有出面干涉的權利。
+            <h2>服务</h2>
+            <div class="service-grid">
+                <div class="div" fadeUp="true">
+                    <h3>NO CONVERSION THERAPY</h3>
+                    <a href="https://victimsunion.org">官方網站</a> | <a href="/nct">地圖</a>
+                </div>
+                <div class="div" fadeUp="true">
+                    <h3>@MTF.LGBT MAIL</h3>
+                    <p>MTF.LGBT邮箱，跨性别者自己的邮箱</p>
+                    <a href="https://mail.mtf.lgbt/login">登录 | 注册</a>
+                </div>
+            </div>
+            
         </div>
     </div>
 </template>
@@ -70,5 +66,24 @@ onMounted(() => {
     font-size: 4rem;
     font-weight: bold;
     margin-bottom: 2rem;
+}
+.thisButton {
+    color:white;
+    transform: scale(1);
+    transition: all 0.3s ease-in-out;
+}
+.thisButton:hover {
+    color:white;
+    padding:3px 40px;
+    transform: scale(2);
+}
+
+.Spons{
+    font-size: 1.5em;
+}
+
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
 }
 </style>

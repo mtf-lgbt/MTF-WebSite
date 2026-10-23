@@ -7,7 +7,7 @@ const { isMobile, isTablet } = useDeviceType();
     <footer>
         <div class="footerLink">
             <a href="https://github.com/HosinoEJ"><img src="/icon/github.svg" /></a>
-            <a href="mailto:hosinoeiji@gmail.com"><img src="/icon/gmail.svg" /></a>
+            <a href="mailto:contact@mtf.lgbt"><img src="/icon/gmail.svg" /></a>
             <a href="https://t.me/@HosinoNeko_meow"><img src="/icon/telegram.svg" /></a>
             <a href="/rss.xml"><img src="/icon/rss.svg" /></a>
             <a href="/"><img class="my-head" :src="$HeadImageX64px"/></a>
@@ -28,6 +28,7 @@ const { isMobile, isTablet } = useDeviceType();
     <div class="footerData">
         <div class="left">
             @HosinoNeko - 2026
+            <span style="margin-left: 20px;"><a href="mailto:support@mtf.lgbt">获取支援</a></span>    
         </div>
         <div class="right">
             <a href="/license">Apache2.0License</a>

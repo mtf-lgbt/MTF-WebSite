@@ -1,6 +1,9 @@
 import './assets/main.css'
 import './assets/ctrl.css'
 import 'material-symbols/outlined.css';
+import '@fontsource/roboto/400.css'
+import '@fontsource/roboto/500.css' 
+import '@fontsource/roboto/700.css'
 
 import { createRouter, createWebHistory } from 'vue-router'
 import { createApp } from 'vue'

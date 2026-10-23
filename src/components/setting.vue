@@ -40,7 +40,7 @@ const COOKIE_OPTS = { expires: 365, sameSite: 'Lax', path: '/' }
 
 const langs = [
     { code: 'zhcn', label: '简体中文' },
-    { code: 'enus', label: 'English' },
+    //{ code: 'enus', label: 'English' },
     { code: 'ja',   label: '日本語' }
 ]
 const switchLang = (code) => {

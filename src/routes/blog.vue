@@ -22,7 +22,7 @@
         </transition>
         -->
 
-        <m3e-content-pane fadeUp="true">
+        <m3e-content-pane fadeUp="true" class="article-pane">
             <h1>{{ post ? post.title : route.params.title }}</h1>
             <div class="blog-meta" v-if="post">
                 <span class="meta-item">{{ t('routes.blogs.author') }} {{ post.author }}，</span>
@@ -158,6 +158,11 @@ watch(() => route.params.title, loadMarkdown)
 <style scoped>
 h1{
     margin: 0 auto;
+}
+
+.article-pane {
+    min-width: 0;      /* 允许 Flex 子项收缩到内容最小宽度以下 */
+    flex: 1;           /* 确保它占据剩余空间（可选，视 m3e-content-pane 默认样式而定） */
 }
 
 .toc-sidebar {

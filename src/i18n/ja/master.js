@@ -1,23 +1,12 @@
 import home from './home.js'
 import friends from './friends.js'
+import blogs from './blogs.js'
 
-const zhcn = {
+const ja = {
     routes: {
         home,
         friends,
-        blogs: {
-            menuView: {
-                recommend: 'おすすめ',
-                allblogs: 'すべての文章',
-            },
-            tagAll: '全部',
-            outLine: '記事の概要',
-            author: '作者',
-            releaseDate: '公開日',
-            language: '言語',
-            NoRelatedAvailable: '関連するコンテンツがありません',
-            viewOtherBlogs: '←他の記事を查看',
-        }
+        blogs
     },
     components: {
         header: {
@@ -54,4 +43,4 @@ const zhcn = {
     }
 }
 
-export default zhcn;
+export default ja;

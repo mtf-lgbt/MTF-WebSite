@@ -33,16 +33,17 @@ app.config.globalProperties.$HeadImageX64px = 'https://avatars.githubusercontent
 //路由表
 const routes = [
     //{ path: '/', component: Home },
-    { path: '/', component: LocalizedPage, props: { page: 'home' } },
-    { path: '/friends', component: Friends },
-    { path: '/license', component: license },
-    { path: '/blog', component: blogs },
-    { path: '/blog/:title', component: blog },
-    { path: '/blogMdOnly/:title', component: blogMdOnly },
-    { path: '/nct', component: nct },
-    { path: '/about', component: LocalizedPage, props: { page: 'about' } },
-    { path: '/spons', component: LocalizedPage, props: { page: 'spons' } },
-    { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound }
+    { path: '/', component: LocalizedPage, props: { page: 'home' } },//主页
+    { path: '/friends', component: Friends },//友情链接
+    { path: '/license', component: license },//使用协议
+    { path: '/blog', component: blogs },//文章阅读页面
+    { path: '/blog/:title', component: blog },//文章列表
+    { path: '/blogMdOnly/:title', component: blogMdOnly },//文章阅读页面，删除了其他元素，用于iframe
+    { path: '/nct', component: nct },//No Conversion Therapy
+    { path: '/about', component: LocalizedPage, props: { page: 'about' } },//关于我们
+    { path: '/spons', component: LocalizedPage, props: { page: 'spons' } },//捐助
+    { path: '/manual', component: LocalizedPage, props: { page: 'manual' } },//使用手册
+    { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound }//404页面
 ]
 
 const router = createRouter({

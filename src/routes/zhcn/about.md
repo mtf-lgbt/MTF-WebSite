@@ -6,7 +6,7 @@
 
 <m3e-card>
     <h2 slot="header">使用手册</h2>
-    <p slot="content">站长似乎不想占用这里的空间，所以详细请看<a href="/blog/USE-MANUAL">使用手册</a></p>
+    <p slot="content">站长似乎不想占用这里的空间，所以详细请看<a href="/manual">使用手册</a></p>
 </m3e-card>
 <m3e-card>
     <h2 slot="header">TD.List</h2>

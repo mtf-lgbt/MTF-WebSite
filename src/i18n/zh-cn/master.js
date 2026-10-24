@@ -1,10 +1,8 @@
-import home from './home.js'
 import friends from './friends.js'
 import blogs from './blogs.js'
 
 const zhcn = {
     routes: {
-        home,
         friends,
         blogs
     },
@@ -38,6 +36,7 @@ const zhcn = {
                 friends: '友链',
                 blogList: '文章列表',
                 about: '关于本站',
+                manual: '使用手册'
             }
         }
     }

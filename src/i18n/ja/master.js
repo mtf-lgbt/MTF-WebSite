@@ -38,6 +38,7 @@ const ja = {
                 friends: '友達リンク',
                 blogList: '記事メニュー',
                 about: 'サイトについて',
+                manual: 'マニュアル'
             }
         }
     }

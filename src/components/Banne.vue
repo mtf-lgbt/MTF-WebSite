@@ -1,10 +1,9 @@
 <script setup>
-import { useDeviceType } from '../utils/isMobie';
-const { isMobile, isTablet } = useDeviceType();
-import { ref, onUnmounted, watch, onMounted, computed } from 'vue';
+import { ref, onUnmounted, watch, onMounted } from 'vue';
 import MidiPlayer from 'midi-player-js';
 import Soundfont from 'soundfont-player';
 import { useRoute } from 'vue-router';
+import { BANNER_HEIGHT } from '@/utils/setting'
 
 import { gsap } from 'gsap'
 import { ScrambleTextPlugin } from 'gsap/ScrambleTextPlugin'
@@ -21,127 +20,132 @@ let audioContext = null;
 
 
 const handleDivClick = () => {
-  const currentTime = Date.now();
-  //防呆機制：如果兩次點擊間隔超過 1.5 秒，就重置計數（代表不是連續點擊）
-  if (currentTime - lastClickTime > 1500) {
-    clickCount.value = 0;
-  }
-  lastClickTime = currentTime;
-  clickCount.value++;
-  // 點滿 5 下，觸發播放
-  if (clickCount.value === 5) {
-    clickCount.value = 0; // 重置計數器
-    startAndPlayMIDI();
-  }
+    const currentTime = Date.now();
+    //防呆機制：如果兩次點擊間隔超過 1.5 秒，就重置計數（代表不是連續點擊）
+    if (currentTime - lastClickTime > 1500) {
+        clickCount.value = 0;
+    }
+    lastClickTime = currentTime;
+    clickCount.value++;
+    // 點滿 5 下，觸發播放
+    if (clickCount.value === 5) {
+        clickCount.value = 0; // 重置計數器
+        startAndPlayMIDI();
+    }
 };
 
 
 // 載入並播放 MIDI
 const startAndPlayMIDI = async () => {
-  try {
-    playerState.value = '正在初始化...';
+    try {
+        playerState.value = '正在初始化...';
 
-    // 1. 初始化 AudioContext (必須由這次的 click 事件鏈觸發，瀏覽器才允許發聲)
-    audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    const response = await fetch('/114');
-    if (!response.ok) throw new Error('找不到 MIDI 檔案，請檢查 public 路徑');
-    const arrayBuffer = await response.arrayBuffer();
-    // 3. 載入音色庫
-    const instrument = await Soundfont.instrument(
-      audioContext, 
-      'https://raw.githubusercontent.com/gleitz/midi-js-soundfonts/gh-pages/MusyngKite/acoustic_grand_piano-mp3.js'
-    );
+        // 1. 初始化 AudioContext (必須由這次的 click 事件鏈觸發，瀏覽器才允許發聲)
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        const response = await fetch('/114');
+        if (!response.ok) throw new Error('找不到 MIDI 檔案，請檢查 public 路徑');
+        const arrayBuffer = await response.arrayBuffer();
+        // 3. 載入音色庫
+        const instrument = await Soundfont.instrument(
+            audioContext, 
+            'https://raw.githubusercontent.com/gleitz/midi-js-soundfonts/gh-pages/MusyngKite/acoustic_grand_piano-mp3.js'
+        );
 
-    // 4. 設定播放器
-    player = new MidiPlayer.Player((event) => {
-      if (event.name === 'Note on' && event.velocity > 0) {
-        instrument.play(event.noteName, audioContext.currentTime, {
-          gain: event.velocity / 128,
+        // 4. 設定播放器
+        player = new MidiPlayer.Player((event) => {
+            if (event.name === 'Note on' && event.velocity > 0) {
+                instrument.play(event.noteName, audioContext.currentTime, {
+                    gain: event.velocity / 128,
+                });
+            }
         });
-      }
-    });
 
-    // 5. 餵入檔案並播放
-    player.loadArrayBuffer(arrayBuffer);
-    player.play();
-    playerState.value = '播放中';
+        // 5. 餵入檔案並播放
+        player.loadArrayBuffer(arrayBuffer);
+        player.play();
+        playerState.value = '播放中';
 
-    // 監聽播放結束事件
-    player.on('endOfFile', () => {
-      playerState.value = '播放結束';
-    });
-    console.info('不要告訴別人唷~～(∠・ω< )⌒☆')
+        // 監聽播放結束事件
+        player.on('endOfFile', () => {
+            playerState.value = '播放結束';
+        });
+        console.info('不要告訴別人唷~～(∠・ω< )⌒☆')
 
-  } catch (error) {
-    console.error(error);
-    playerState.value = 'error';
-  }
+    } catch (error) {
+        console.error(error);
+        playerState.value = 'error';
+    }
 };
 
 const route = useRoute();
+const contentHeight = ref(BANNER_HEIGHT || 'calc(100vh - 66px)')
+const bannerDisplay = ref('flex')
+
 const checkBannerHeight = () => {
-  const bannerEl = document.getElementById('banner');
-  if (bannerEl) {
     if (route.fullPath !== '/') {
-      //bannerEl.style.height = 'calc(50vh - 66px)';
-      bannerEl.style.display = 'none';
+        bannerDisplay.value = 'none'
     } else {
-      bannerEl.style.height = 'calc(100vh - 66px)'; // 回歸預設值
+        bannerDisplay.value = 'flex'
+        contentHeight.value = BANNER_HEIGHT
     }
-  }
-};
+}
 
 
 import subtitle from '@/data/subtitle.json';
-let blurbs = subtitle,
-  curIndex = 0;
-
-
+let blurbs = subtitle,//读取副标题内容
+    curIndex = 0;//序号计数器
 const nextText = () => {
-  curIndex = (curIndex + 1) % blurbs.length;
-  gsap.to(".h2", {
-    scrambleText: {
-      text: blurbs[curIndex],
-      chars: "upperAndLowerCase",
-      revealDelay: 0.2,
-      tweenLength: true,
-      newClass: curIndex == 2 ? "border" : ""
-    },
-    ease: "power2.inOut",
-    overwrite: "auto",
-    duration: 4.2
-  });
+    // 随机选一个和当前不同的索引
+    let nextIndex;
+    do {
+        nextIndex = Math.floor(Math.random() * blurbs.length);
+    } while (nextIndex === curIndex && blurbs.length > 1);
+    curIndex = nextIndex;
+    gsap.to(".h2", {
+        scrambleText: {
+            text: blurbs[curIndex],
+            chars: "upperAndLowerCase",
+            revealDelay: 0.2,
+            tweenLength: true,
+            newClass: curIndex == 2 ? "border" : ""
+        },
+        ease: "power2.inOut",
+        overwrite: "auto",
+        duration: 4.2
+    });
 };
 
 onMounted(() => {
-  checkBannerHeight();// 首次檢查 banner 高度
-  setInterval(nextText, 20000); // 每10秒切换一次文本
+    checkBannerHeight();// 首次檢查 banner 高度
+    setInterval(nextText, 20000); // 每10秒切换一次文本
 });
 
 // 組件卸載時務必釋放記憶體
 onUnmounted(() => {
-  if (player) player.stop();
-  if (audioContext) audioContext.close();
+    if (player) player.stop();
+    if (audioContext) audioContext.close();
 });
 
 
 
 watch(() => route.fullPath, () => {
-  checkBannerHeight();
+    checkBannerHeight();
 });
 
 
 </script>
 <template>
-    <div id="banner">
+    <div id="banner" :style="{ height: contentHeight, display: bannerDisplay }">
         <h1 fadeUp="true">{{ $t('components.banner.title') }}</h1>
 
         <h2
-        class="click-box h2" 
-        @click="handleDivClick"
-        :class="{ 'playing': playerState === '播放中' }"
-        fadeUp="true"
-        >點解我眼角長期都帶住淚？因為我一直被困喺一個暗無天日嘅十月入面</h2>
+            class="click-box h2" 
+            @click="handleDivClick"
+            :class="{ 'playing': playerState === '播放中' }"
+            fadeUp="true"
+        >
+            點解我眼角長期都帶住淚？因為我一直被困喺一個暗無天日嘅十月入面
+        </h2>
     </div>
 </template>
 <style scoped>

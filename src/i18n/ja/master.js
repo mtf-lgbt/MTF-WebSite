@@ -30,7 +30,11 @@ const zhcn = {
         },
         setting: {
             title: '設定',
-            language: '言語'
+            language: '言語',
+            color: '色の配置',
+            schemes: '配色',
+            contrast: '対比度',
+            bannerHeight: 'バナーの高さ'
         },
         footer: {
             getSupport: 'サポートを受ける',

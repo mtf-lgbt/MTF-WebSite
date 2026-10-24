@@ -30,7 +30,11 @@ const zhcn = {
         },
         setting: {
             title: '设置',
-            language: '语言'
+            language: '语言',
+            color: '颜色设置',
+            schemes: '配色方案',
+            contrast: '对比度',
+            bannerHeight: '横幅高度'
         },
         footer: {
             getSupport: '获取支持',

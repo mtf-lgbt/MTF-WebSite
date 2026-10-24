@@ -1,47 +1,56 @@
 <template>
-    <div class="blog-layout" @click="handleAnchorClick" :style="layoutStyle">
-        <aside class="toc-sidebar div" v-if="tocHtml && (!isMobile && !isTablet)" fadeUp="true">
-            <a href="/blog">←查看其它文章</a>
-            <div class="toc-title"><h3>目錄</h3></div>
-            <div v-html="tocHtml"></div>
-        </aside>
-
+    <div @click="handleAnchorClick" :style="layoutStyle">
+        <!-- 侧边栏 TOC -->
+        <m3e-content-pane class="toc-sidebar" v-if="!isMobile && !isTablet">
+                <a href="/blog">{{ t('routes.blogs.viewOtherBlogs') }}</a>
+                <m3e-toc for="article-content" max-depth="3">
+                    <span>{{ t('routes.blogs.outLine') }}</span>
+                </m3e-toc>
+        </m3e-content-pane>
+        <!--
         <transition name="fade" mode="out-in">
-            <aside class="toc-sidebar div toc-mobile" v-if="tocHtml && isMobile" fadeUp="true">
-                <button class="toc-mobile-switch" @click="toggleMobileTOC"><img src="/public/icon/menu.svg" style="width: 30px; height: 30px;" alt="Switch" /></button>
-                
-                    <div v-if="mobileTOC_open===true" class="toc-content" v-html="tocHtml"></div>
-                
-            </aside>
+        <aside class="toc-sidebar div toc-mobile" v-if="isMobile" fadeUp="true">
+            <button class="toc-mobile-switch" @click="toggleMobileTOC">
+                <img src="/public/icon/menu.svg" style="width: 30px; height: 30px;" alt="Switch" />
+            </button>
+            <div v-if="mobileTOC_open" class="toc-content">
+                <m3e-toc for="article-content" max-depth="3">
+                    <span slot="overline">{{ t('routes.blogs.outLine') }}</span>
+                </m3e-toc>
+            </div>
+        </aside>
         </transition>
+        -->
 
-        <main fadeUp="true" class="div">
+        <m3e-content-pane fadeUp="true" class="article-pane">
             <h1>{{ post ? post.title : route.params.title }}</h1>
             <div class="blog-meta" v-if="post">
-                <span class="meta-item">作者：{{ post.author }}，</span>
-                <span class="meta-item">發布時間：{{ post.CreationDate }}，</span>
-                <span class="meta-item">語言：{{ post.Language }}</span>
+                <span class="meta-item">{{ t('routes.blogs.author') }} {{ post.author }}，</span>
+                <span class="meta-item">{{ t('routes.blogs.releaseDate') }} {{ post.CreationDate }}，</span>
+                <span class="meta-item">{{ t('routes.blogs.language') }} {{ post.Language }}</span>
             </div>
-            <div class="markdown-body" v-html="html"></div>
+            <div class="markdown-body" id="article-content" v-html="html"></div>
             <div class="comments-container">
                 
             </div>
-        </main>
+        </m3e-content-pane>
     </div>
-    <Giscus
-        repo="HosinoEJ/HosinoNeko-Blog"
-        repoId="R_kgDOSKjMXg"
-        category="message"
-        categoryId="DIC_kwDOSKjMXs4C-AfD"
-        mapping="title"
-        strict="1"
-        reactionsEnabled="1"
-        emitMetadata="1"
-        inputPosition="top"
-        theme="preferred_color_scheme"
-        lang="zh-TW"
-        loading="lazy"
-    />
+    <m3e-content-pane>
+        <Giscus
+            repo="HosinoEJ/HosinoNeko-Blog"
+            repoId="R_kgDOSKjMXg"
+            category="message"
+            categoryId="DIC_kwDOSKjMXs4C-AfD"
+            mapping="title"
+            strict="1"
+            reactionsEnabled="1"
+            emitMetadata="1"
+            inputPosition="top"
+            theme="preferred_color_scheme"
+            lang="zh-TW"
+            loading="lazy"
+        />
+    </m3e-content-pane>
 </template>
 
 <script setup>
@@ -51,10 +60,13 @@ import { useRoute } from 'vue-router'
 import MarkdownIt from 'markdown-it'
 import '../assets/github-markdown-css/github-markdown.css'
 import anchor from 'markdown-it-anchor';
-import toc from 'markdown-it-toc-done-right';
 import { fetchBlogData, getPostByFilename } from '../utils/blogData.js';
-
 import { useDeviceType } from '../utils/isMobie';
+import { useI18n } from 'vue-i18n';//国际化
+import "@m3e/web/toc";
+import "@m3e/web/content-pane";
+
+const { t } = useI18n();
 const { isMobile, isTablet } = useDeviceType();
 
 const layoutStyle = computed(() => ({
@@ -63,7 +75,6 @@ const layoutStyle = computed(() => ({
 
 const route = useRoute()
 const html = ref('')
-const tocHtml = ref('');
 const md = new MarkdownIt({
     html: true,
     breaks: true
@@ -72,14 +83,6 @@ const md = new MarkdownIt({
     // 這裡的 slugify 確保中文標題能生成正確的 ID
     slugify: (s) => String(s).trim().toLowerCase().replace(/\s+/g, '-')
 })
-.use(toc, {
-    containerClass: 'toc-done-right',
-    listType: 'ul',
-    slugify: (s) => String(s).trim().toLowerCase().replace(/\s+/g, '-'),
-    callback: (htmlString) => {
-        tocHtml.value = htmlString;
-    }
-});
 
 const handleAnchorClick = (e) => {
     const link = e.target.closest('a');
@@ -157,35 +160,20 @@ h1{
     margin: 0 auto;
 }
 
-.toc-sidebar {
-  position: sticky;
-  top: 120px;
-  width: 250px;
-  flex-shrink: 0;  /* 防止目錄被文章擠扁 */
-  max-height: calc(100vh - 180px); /* 限制高度，防止超過視窗 */
-  overflow-y: auto;
-  padding-left: 20px;
-}
-.blog-layout {
-  
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 40px;
-  /*max-width: 1200px; */
-  margin: 0 auto;
-  padding: 20px;
+.article-pane {
+    min-width: 0;      /* 允许 Flex 子项收缩到内容最小宽度以下 */
+    flex: 1;           /* 确保它占据剩余空间（可选，视 m3e-content-pane 默认样式而定） */
 }
 
-:deep(.toc-done-right) ul {
-  list-style-type: none;
-  padding-left: 10px; /* 控制縮進量 */
-  margin: 0;
-}
-:deep(.toc-done-right) > ul {
-  padding-left: 0; /* 第一層不縮進 */
-}
+.toc-sidebar {
+    position: sticky;
+    top: 65px;
+    width: 250px;
+    flex-shrink: 0;  /* 防止目錄被文章擠扁 */
+    max-height: calc(100vh - 180px); /* 限制高度，防止超過視窗 */
+    overflow-y: auto;
+    padding-left: 20px;
+} 
 
 .blog-meta {
     color: var(--color-meta);

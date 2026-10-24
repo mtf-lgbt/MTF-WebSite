@@ -1,15 +1,6 @@
 <template>
-    <div fadeUp="true">
+    <m3e-content-pane fadeUp="true">
         <h1>404 Not Found</h1>
         <p>Bro 你來到了一片荒原...</p>
-    </div>
+    </m3e-content-pane>
 </template>
-<style scoped>
-div{
-    min-height: 50vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}
-</style>

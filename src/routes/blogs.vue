@@ -1,66 +1,75 @@
 <template>
-  <div  class="blog-container" fadeUp="true">
+  <m3e-content-pane class="blog-container" fadeUp="true">
     <div v-if="!isMobile" style="margin: 50px 0 20px 0;">
         <span class="" style="font-size: 2em; font-weight: bold;">
-            推荐阅读
+            {{ t('routes.blogs.menuView.recommend') }}
         </span>
     </div>
     <div v-if="!isMobile" class="recommend-box">
         <router-link v-for="post in recommendList" :key="post.title" :to="`/blog/${post.title}`">
-            <div class="parent div">
-                <div class="post-card recommend-card">
-                    <h2>{{ post.title }}</h2>
-                    <img 
-                    class="recommand-cardImg" 
+            <m3e-card class="image-card" actionable inline orientation="horizontal">
+                    <img
+                    width="100px"
+                    slot="header"
                     :src="post.illustration
                          || 'https://free.picui.cn/free/19498/2026/09/05/6a9c00a188c9f.jpg'" 
                     alt="Recommendation Image" />
-                </div>
-            </div>
+                    <h2 slot="content">{{ post.title }}</h2>
+            </m3e-card>
         </router-link>
     </div>
-    <hr v-if="!isMobile">
+    <m3e-divider v-if="!isMobile"></m3e-divider>
     <div style="margin: 50px 0 50px 0;">
         <span class="" style="font-size: 2em; font-weight: bold;">
-            全部文章
+            {{ t('routes.blogs.menuView.allblogs') }}
         </span>
     </div>
-    <nav class="tag-filter div">
-        <button
-            @click="filterByTag(null)" 
-            :button="currentTag == id ? '2' : '1'"
-          >全部
-        </button>
-        
-        <button
-            v-for="(tagName, id) in allTags" 
-            :key="id"
-            @click="filterByTag(id)"
-            :button="currentTag == id ? '2' : '1'"
-        >
-            {{ tagName }}
-        </button>
-    </nav>
+    
+    <m3e-content-pane>
+        <m3e-button-group class="tag-filter">
+            <m3e-button
+                @click="filterByTag(null)" 
+                :variant="currentTag == id ? 'filled' : 'elevated'"
+            >
+                {{ t('routes.blogs.tagAll') }}
+            </m3e-button>
+            
+            <m3e-button
+                v-for="(tagName, id) in allTags" 
+                :key="id"
+                @click="filterByTag(id)"
+                :variant="currentTag == id ? 'filled' : 'elevated'"
+            >
+                {{ tagName }}
+            </m3e-button>
+        </m3e-button-group>
+    </m3e-content-pane>
 
     <main class="post-list">
-        <router-link v-for="post in filteredPosts" :key="post.filename" :to="`/blog/${post.filename}`" class="link-card post-card div">
-            <h3>{{ post.title }}</h3>
-            <div class="meta">
-                <span>作者：{{ post.author }}</span> | 
-                <span>日期：{{ post.CreationDate }}</span> |
-                <span>語言：{{ post.Language }}</span><br>
-            </div>
-            
-            <div class="tags">
-                <span v-for="tid in post.tagid" :key="tid" class="tag-badge">
-                    #{{ allTags[tid] }}
-                </span>
-            </div>
+        <router-link 
+            v-for="post in filteredPosts"
+            :key="post.filename"
+            :to="`/blog/${post.filename}`"
+        >
+            <m3e-card variant="filled" actionable class="menu-card">
+                <h3 slot="content">{{ post.title }}</h3>
+                <div slot="content" class="meta">
+                    <span>{{ t('routes.blogs.author') }} {{ post.author }}</span> | 
+                    <span>{{ t('routes.blogs.releaseDate') }} {{ post.CreationDate }}</span> |
+                    <span>{{ t('routes.blogs.language') }} {{ post.Language }}</span><br>
+                </div>
+                
+                <div slot="content" class="tags">
+                    <span v-for="tid in post.tagid" :key="tid" class="tag-badge">
+                        #{{ allTags[tid] }}
+                    </span>
+                </div>
+            </m3e-card>
         </router-link>
 
-        <p v-if="filteredPosts.length === 0">暫無相關內容。</p>
+        <p v-if="filteredPosts.length === 0">{{ t('routes.blogs.NoRelatedAvailable') }}</p>
     </main>
-  </div>
+  </m3e-content-pane>
 </template>
 
 <script setup>
@@ -69,7 +78,14 @@ import { useRoute, useRouter } from 'vue-router';
 import { fetchBlogData, getFilteredPosts } from '../utils/blogData.js';
 import recommendList from '@/data/recommend.json';
 import { useDeviceType } from '@/utils/isMobie.js'
+import { useI18n } from 'vue-i18n';//国际化
+import "@m3e/web/button";//莫奈风格 按钮
+import "@m3e/web/button-group";//莫奈按钮组
+import "@m3e/web/card";
+import "@m3e/web/content-pane";
+import "@m3e/web/divider";
 
+const { t } = useI18n();
 const { isMobile, isTablet,isDesktop } = useDeviceType();
 
 const route = useRoute();
@@ -99,36 +115,8 @@ const allTags = computed(() => blogData.value.TagList);
 </script>
 
 <style scoped>
-.post-card {
-    display: block;
-    padding: 15px;
-    position: relative; /* 确保内容层级高于图片背景 */
-    z-index: 1;
-}
-.post-card h2{
-    pointer-events: none;
-}
-
-.parent {
-    position: relative; /* 1. 为绝对定位的子元素建立参考系 */
-    overflow: hidden;   /* 2. 让父元素充当裁剪遮罩（如圆角、超出隐藏） */
-}
-
-.recommand-cardImg {
-    position: absolute; /* 脱离文档流，不影响其他元素的布局位置 */
-    transform: scale(1.3);
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;  /* 保持图片比例填满父元素 */
-    z-index: -99;         /* 确保在底层 */
-    transition: all 0.3s ease; /* 平滑过渡效果 */
-    opacity: 0; /* 初始透明度 */
-}
-.recommand-cardImg:hover {
-    transform: scale(1.4);
-    opacity: 0.6; /* 鼠标悬停时显示图片 */
+.menu-card{
+    margin: 10px 0;
 }
 
 .post-list {
@@ -136,12 +124,7 @@ const allTags = computed(() => blogData.value.TagList);
     flex-direction: column-reverse;
 }
 
-.recommend-box {
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 20px;
-}
-.recommend-card {
-    margin-right: 0;
+.image-card{
+    margin: 20px;
 }
 </style>

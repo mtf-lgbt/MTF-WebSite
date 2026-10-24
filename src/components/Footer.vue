@@ -1,5 +1,8 @@
 <script setup>
 import { useDeviceType } from '../utils/isMobie';
+import {useI18n} from 'vue-i18n'
+import "@m3e/web/avatar";
+const { t, locale } = useI18n()
 const { isMobile, isTablet } = useDeviceType();
 </script>
 
@@ -28,7 +31,7 @@ const { isMobile, isTablet } = useDeviceType();
     <div class="footerData">
         <div class="left">
             @HosinoNeko - 2026
-            <span style="margin-left: 20px;"><a href="mailto:support@mtf.lgbt">获取支援</a></span>    
+            <span style="margin-left: 20px;"><a href="mailto:support@mtf.lgbt">{{ $t('components.footer.getSupport') }}</a></span>    
         </div>
         <div class="right">
             <a href="/license">Apache2.0License</a>

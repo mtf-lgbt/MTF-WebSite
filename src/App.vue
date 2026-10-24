@@ -7,39 +7,37 @@ import statusForRt from './components/statusForRt.vue'
 import Banne from './components/Banne.vue';
 import setting from './components/setting.vue';
 
-import { ref, computed, onMounted } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
+import { computed } from 'vue';
+import { useRoute } from 'vue-router';
 import { useDeviceType } from './utils/isMobie';
+import { BgColor, Schemes, CONTRAST } from './utils/setting.js'//设置项目
+import "@m3e/web/theme"
 const { isMobile, isTablet,isDesktop } = useDeviceType();
-
 const route = useRoute()
 
 const mainStyle = computed(() => ({
     flexDirection: (isMobile.value || isTablet.value) ? 'column' : 'row',
 }));
+const queryType = computed(() => route.query.mdOnly === 'true');//是否是文章只读模式
 
-const queryType = computed(() => route.query.mdOnly === 'true');
-
-onMounted(() => {
-    
-    console.log('queryType', queryType,route.query);
-});
 </script>
 
 <template>
-    <div v-if="!queryType">
-        <setting />
-        <Headers />
-        <Banne />
-        <main class="content" :style="mainStyle">
-            <div class="left"><router-view /></div>
-            <statusForRt />
-        </main>
-        <Foot />
-    </div>
-    <div v-else>
-        <router-view />
-    </div>
+    <m3e-theme :color="BgColor" :scheme="Schemes" :contrast="CONTRAST">
+        <div v-if="!queryType">
+            <setting ref="colorSetRef"/>
+            <Headers />
+            <Banne />
+            <main class="content" :style="mainStyle">
+                <div class="left"><router-view /></div>
+                <statusForRt />
+            </main>
+            <Foot />
+        </div>
+        <div v-else>
+            <router-view />
+        </div>
+    </m3e-theme>
 </template>
 
 <style scoped>

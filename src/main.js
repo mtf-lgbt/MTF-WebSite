@@ -16,7 +16,6 @@ import App from './App.vue'
 //其他頁面
 import LocalizedPage from './routes/LocalizedPage.vue';
 
-import Friends from './routes/friends.vue'
 import NotFound from './routes/404.vue'
 import license from './routes/license.vue'
 import blogs from './routes/blogs.vue'
@@ -37,7 +36,8 @@ app.config.globalProperties.$HeadImageX64px = 'https://avatars.githubusercontent
 const routes = [
     //{ path: '/', component: Home },
     { path: '/', component: LocalizedPage, props: { page: 'home' } },//主页
-    { path: '/friends', component: Friends },//友情链接
+    { path: '/friends', component: LocalizedPage, props: { page: 'friends' } },//关于我们
+    //{ path: '/friends', component: Friends },//友情链接
     { path: '/license', component: license },//使用协议
     { path: '/blog', component: blogs },//文章阅读页面
     { path: '/blog/:title', component: blog },//文章列表

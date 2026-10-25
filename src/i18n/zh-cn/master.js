@@ -1,9 +1,7 @@
-import friends from './friends.js'
 import blogs from './blogs.js'
 
 const zhcn = {
     routes: {
-        friends,
         blogs
     },
     components: {

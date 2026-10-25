@@ -68,22 +68,13 @@
 <script setup>
 import { useI18n } from 'vue-i18n';
 import { ref, onMounted } from 'vue';
+import friendsJson from '@/data/friends.json';
 import '@m3e/web/theme'
 
 const { t } = useI18n();
 
-// 1. 定義響應式資料，初始結構與你的 JSON 一致
-const friendsData = ref({ friends: [] });
-
-// 2. 獲取資料
-const loadFriends = async () => {
-    try {
-        const response = await fetch('/friends.json');
-        friendsData.value = await response.json();
-    } catch (err) {
-        console.error("無法讀取友鏈資料：", err);
-    }
-};
+//定義響應式資料，初始結構與你的 JSON 一致
+const friendsData = ref(friendsJson);
 
 onMounted(() => {
     loadFriends();
@@ -91,11 +82,6 @@ onMounted(() => {
 });
 </script>
 <style scoped>
-
-.header {
-    text-align: center;
-    margin-bottom: 40px;
-}
 
 /* 網格系統 */
 .links-grid {

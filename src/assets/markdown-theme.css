@@ -1,0 +1,39 @@
+/* src/assets/markdown-theme.css
+   把 github-markdown-css 的颜色变量重映射到 @m3e/web (Material 3) 主题变量，
+   让 markdown 跟随 <m3e-theme scheme> 而不是系统。
+   用 body .markdown-body 提高特异性，覆盖 @media 里的 .markdown-body 定义。
+*/
+
+body .markdown-body {
+  /* ===== 文字 ===== */
+  --fgColor-default: var(--md-sys-color-on-surface, #1f2328);
+  --fgColor-muted: var(--md-sys-color-on-surface-variant, #59636e);
+  --fgColor-accent: var(--md-sys-color-primary, #0969da);
+  --fgColor-danger: var(--md-sys-color-error, #d1242f);
+  --fgColor-success: var(--md-sys-color-tertiary, #1a7f37);
+  --fgColor-attention: var(--md-sys-color-secondary, #9a6700);
+  --fgColor-done: var(--md-sys-color-primary, #8250df);
+
+  /* ===== 背景 ===== */
+  --bgColor-default: var(--md-sys-color-surface, #ffffff);
+  --bgColor-muted: var(--md-sys-color-surface-container, #f6f8fa);
+  --bgColor-neutral-muted: var(--md-sys-color-surface-container-high, #818b981f);
+  --bgColor-attention-muted: var(--md-sys-color-secondary-container, #fff8c5);
+
+  /* ===== 边框 ===== */
+  --borderColor-default: var(--md-sys-color-outline-variant, #d1d9e0);
+  --borderColor-muted: var(--md-sys-color-outline-variant, #d1d9e0b3);
+  --borderColor-neutral-muted: var(--md-sys-color-outline-variant, #d1d9e0b3);
+  --borderColor-accent-emphasis: var(--md-sys-color-primary, #0969da);
+  --borderColor-danger-emphasis: var(--md-sys-color-error, #cf222e);
+  --borderColor-success-emphasis: var(--md-sys-color-tertiary, #1a7f37);
+  --borderColor-attention-emphasis: var(--md-sys-color-secondary, #9a6700);
+  --borderColor-done-emphasis: var(--md-sys-color-primary, #8250df);
+
+  /* ===== 焦点 ===== */
+  --focus-outlineColor: var(--md-sys-color-primary, #0969da);
+
+  /* 兜底：让 markdown 的 color-scheme 跟着 M3E 走（滚动条、表单控件等） */
+  color: var(--fgColor-default);
+  color-scheme: light dark;
+}

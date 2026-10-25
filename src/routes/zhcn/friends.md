@@ -97,7 +97,6 @@ import { useI18n } from 'vue-i18n';
 import { ref, onMounted } from 'vue';
 import friendsJson from '@/data/friends.json';//友情链接
 import cooperateJson from '@/data/cooperate.json';//合作伙伴网站
-import '@m3e/web/theme'
 
 const { t } = useI18n();
 

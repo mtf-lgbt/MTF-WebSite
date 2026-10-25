@@ -12,48 +12,58 @@ body {
     Arial, 
     sans-serif;
 }
-
-h1 {
-    color: var(--color-title);
-    font-size: 2.5em;
-    margin-bottom: 0.5em;
-    font-weight: 700;
-}
-
-.div,
-.divNobg {
-    padding: 20px;
-    backdrop-filter: blur(10px);
-    margin: 20px;
-    overflow: visible;
-    transform: display 0.3s ease-out;
-}
-.div{
-    background: var(--card-bg);
-    border-radius: var(--border-radius);
-    box-shadow: 0 10px 25px rgb(0 0 0 / 24%);
-}
-.divPd{
-    margin: 20px;
-}
-
-iframe{
-    border: none;
-    border-radius: var(--border-radius);
-    overflow: hidden;
-}
-
 m3e-content-pane {
-  --m3e-content-pane-container-color: var(--md-sys-color-surface-container-lowest);
-  padding: 10px;
+    --m3e-content-pane-container-color: var(--md-sys-color-surface-container-lowest);
+    padding: 10px;
 }
 m3e-card {
     padding: 10px;
 }
 m3e-theme {
-  display: flex;
-  flex-direction: column;
-  flex: 1; /* 配合外层 #app 的 flex 撑满高度 */
-  background-color: var(--md-sys-color-surface-container-high);
-  color: var(--md-sys-color-on-background);
+    display: flex;
+    flex-direction: column;
+    flex: 1; /* 配合外层 #app 的 flex 撑满高度 */
+    background-color: var(--md-sys-color-surface-container-high);
+    color: var(--md-sys-color-on-background);
 }
+
+
+
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 0.5em;
+    font-weight: 700;
+}
+
+iframe{
+    border: none;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+/* link基础样式 */
+a {
+    color: var(--color-link);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+a:hover {
+    color: #2980b9;
+    text-decoration: underline;
+}
+
+/* 淡入上滑动画 */
+[fadeUp="true"] {
+    animation: fadeInUp 0.8s ease-out 0.4s both;
+}
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+

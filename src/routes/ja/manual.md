@@ -1,7 +1,3 @@
-<script setup>
-    import "@m3e/web/callout";
-</script>
-
 <m3e-content-pane fadeUp="true">
 
 # MTF.LGBT 利用マニュアル

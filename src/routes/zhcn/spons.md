@@ -15,7 +15,3 @@
 为了表示感谢，你可以在备注中写下你的愿望。如果这在站长的能力范围之内的话，站长会尽量满足您。不过因为要取得联络，您需要留下您的联络方式才可以实现。
 
 </m3e-content-pane>
-
-<script setup>
-import "@m3e/web/callout";
-</script>

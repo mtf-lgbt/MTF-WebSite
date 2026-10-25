@@ -1,3 +1,5 @@
+//RSS config
+
 import fs from 'fs';
 import path from 'path';
 import { Feed } from 'feed';

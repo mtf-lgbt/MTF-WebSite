@@ -139,7 +139,7 @@ watch(() => route.fullPath, () => {
         <h1 fadeUp="true">{{ $t('components.banner.title') }}</h1>
 
         <h2
-            class="click-box h2" 
+            class="h2" 
             @click="handleDivClick"
             :class="{ 'playing': playerState === '播放中' }"
             fadeUp="true"
@@ -162,6 +162,11 @@ watch(() => route.fullPath, () => {
 #banner [fadeUp="true"] {
     animation-duration: 0.5s;
     animation-delay: 0s;
+}
+
+.h2{
+    user-select: none;
+    -webkit-user-select: none; /* Safari 旧版本需要 */
 }
 
 .c-g { color: #5bcffa; }

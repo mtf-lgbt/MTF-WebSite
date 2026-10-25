@@ -1,9 +1,5 @@
 <script setup>
 import { onMounted } from 'vue'
-import "@m3e/web/button";
-import "@m3e/web/split-button";
-import "@m3e/web/callout";
-
 
 onMounted(() => {
     document.title = 'MTF.LGBT'

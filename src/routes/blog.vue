@@ -62,8 +62,6 @@ import anchor from 'markdown-it-anchor';
 import { fetchBlogData, getPostByFilename } from '../utils/blogData.js';
 import { useDeviceType } from '../utils/isMobie';
 import { useI18n } from 'vue-i18n';//国际化
-import "@m3e/web/toc";
-import "@m3e/web/content-pane";
 
 const { t } = useI18n();
 const { isMobile, isTablet } = useDeviceType();

@@ -79,11 +79,6 @@ import { fetchBlogData, getFilteredPosts } from '../utils/blogData.js';
 import recommendList from '@/data/recommend.json';
 import { useDeviceType } from '@/utils/isMobie.js'
 import { useI18n } from 'vue-i18n';//国际化
-import "@m3e/web/button";//莫奈风格 按钮
-import "@m3e/web/button-group";//莫奈按钮组
-import "@m3e/web/card";
-import "@m3e/web/content-pane";
-import "@m3e/web/divider";
 
 const { t } = useI18n();
 const { isMobile, isTablet,isDesktop } = useDeviceType();

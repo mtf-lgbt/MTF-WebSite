@@ -26,7 +26,7 @@
     </div>
     
     <m3e-content-pane>
-        <m3e-button-group class="tag-filter">
+        <div class="tag-filter">
             <m3e-button
                 @click="filterByTag(null)" 
                 :variant="currentTag == id ? 'filled' : 'elevated'"
@@ -42,7 +42,7 @@
             >
                 {{ tagName }}
             </m3e-button>
-        </m3e-button-group>
+        </div>
     </m3e-content-pane>
 
     <main class="post-list">
@@ -121,5 +121,20 @@ const allTags = computed(() => blogData.value.TagList);
 
 .image-card{
     margin: 20px;
+}
+
+
+.tag-filter {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+}
+
+/* 可选：防止超长标签撑破容器 */
+.tag-filter m3e-button {
+    max-width: 100%;
+    white-space: normal;
 }
 </style>

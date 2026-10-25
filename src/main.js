@@ -1,4 +1,4 @@
-import './assets/github-markdown-css/github-markdown.css'
+import 'github-markdown-css/github-markdown.css';
 import './assets/markdown-theme.css'
 
 import './assets/main.css'

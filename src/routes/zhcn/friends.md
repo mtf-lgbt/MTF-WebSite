@@ -4,6 +4,40 @@
 
 不知道有什么用，可能是免得让人忘记有这些TEANSGENDER的存在吧
 
+## 合作伙伴
+
+<div class="links-grid">
+<m3e-card actionable
+    v-for="cooperate in cooperateData.friends" 
+    :key="cooperate.url" 
+    :href="cooperate.url" 
+    target="_blank" 
+    :style="{ 
+        '--m3e-filled-card-container-color': cooperate.color ?
+            cooperate.color + '22' : '#3388bb22',
+        '--m3e-card-headline-color': cooperate.color || '#3388bb'
+    }"
+>
+<img 
+    :src="cooperate.avatar" 
+    class="friend-avatar"
+    slot="header"
+    alt="avatar"
+    @error="(e) => e.target.src = 'https://avatars.githubusercontent.com/u/342978400?s=400&v=4'"
+>
+    
+<h3 slot="content">
+    {{ cooperate.name }}
+</h3>
+    
+<p slot="content" v-if="cooperate.desc" class="desc">
+    {{ cooperate.desc }}
+</p>
+</m3e-card>
+</div>
+
+## 朋友们
+
 <div class="links-grid">
 <m3e-card actionable
     v-for="friend in friendsData.friends" 
@@ -61,13 +95,15 @@
 <script setup>
 import { useI18n } from 'vue-i18n';
 import { ref, onMounted } from 'vue';
-import friendsJson from '@/data/friends.json';
+import friendsJson from '@/data/friends.json';//友情链接
+import cooperateJson from '@/data/cooperate.json';//合作伙伴网站
 import '@m3e/web/theme'
 
 const { t } = useI18n();
 
 //定義響應式資料，初始結構與你的 JSON 一致
 const friendsData = ref(friendsJson);
+const cooperateData = ref(cooperateJson);
 
 onMounted(() => {
     loadFriends();

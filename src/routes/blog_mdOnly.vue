@@ -20,7 +20,6 @@
 import { ref, onMounted, watch , computed } from 'vue'
 import { useRoute } from 'vue-router'
 import MarkdownIt from 'markdown-it'
-import '../assets/github-markdown-css/github-markdown.css'
 import anchor from 'markdown-it-anchor';
 import toc from 'markdown-it-toc-done-right';
 import { fetchBlogData, getPostByFilename } from '../utils/blogData.js';

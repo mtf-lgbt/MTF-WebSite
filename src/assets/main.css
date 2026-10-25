@@ -26,7 +26,9 @@ m3e-theme {
     background-color: var(--md-sys-color-surface-container-high);
     color: var(--md-sys-color-on-background);
 }
-
+m3e-callout {
+    margin: 10px 0;
+}
 
 
 h1 {

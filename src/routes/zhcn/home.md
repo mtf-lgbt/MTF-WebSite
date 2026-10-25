@@ -25,6 +25,7 @@ onMounted(() => {
     <span>目前邮箱订阅因部分原因正在维修，暂时无法提供订阅服务。但是订阅申请仍然可以提交，在修复完成后会继续为您提供订阅服务。</span>
     <!-- Context omitted for brevity -->
 </m3e-callout>
+
 <m3e-button variant="filled" href="https://forms.gle/v3Q9DCPZLApLHkFn8" button="2">邮箱订阅</m3e-button>
 
 如果你没有Google账号，可以通过以下方式订阅：

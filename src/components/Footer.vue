@@ -34,6 +34,7 @@ const { isMobile, isTablet } = useDeviceType();
             <span style="margin-left: 20px;"><a href="mailto:support@mtf.lgbt">{{ $t('components.footer.getSupport') }}</a></span>    
         </div>
         <div class="right">
+            <a href="https://icp.gov.moe/?keyword=20268965" target="_blank">萌ICP备20268965号</a>
             <a href="/license">Apache2.0License</a>
             <a v-if="isTablet" href="https://notbyai.fyi/"><img src="/Not_ByAi/_SVG/Developed-By-Human-Not-By-AI-Badge-white.svg" /></a>
         </div>

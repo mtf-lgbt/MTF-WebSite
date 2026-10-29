@@ -1,10 +1,10 @@
 // src/routes-list.js
 export default [
   '/',
-  'friends',
+  '/friends',
   '/about',
   '/spons',
   '/manual',
-  'blog',
-  'nct'
+  '/blog',
+  '/nct'
 ];

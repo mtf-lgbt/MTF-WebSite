@@ -7,6 +7,7 @@ import viteString from 'vite-plugin-string'
 import Markdown from 'unplugin-vue-markdown/vite'
 import anchor from 'markdown-it-anchor'
 import toc from 'markdown-it-toc-done-right'
+import seoFiles from 'vite-plugin-seo-files';//SEO
 
 // https://vite.dev/config/
 export default defineConfig(({ command }) => {
@@ -33,6 +34,9 @@ export default defineConfig(({ command }) => {
         }
       }),
       vueDevTools(),
+      seoFiles({
+        siteUrl: 'https://mtf.lgbt',
+      }),
       viteString({
         include: '**/*.md',
         exclude: 'src/routes/**/*.md'

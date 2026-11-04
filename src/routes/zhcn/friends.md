@@ -105,7 +105,6 @@ const friendsData = ref(friendsJson);
 const cooperateData = ref(cooperateJson);
 
 onMounted(() => {
-    loadFriends();
     document.title = '友情链接'
 });
 </script>

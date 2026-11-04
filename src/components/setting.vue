@@ -97,7 +97,7 @@ locale.value = LANG.value
 
 const langs = [
     { code: 'zhcn', label: '简体中文' },
-    //{ code: 'enus', label: 'English' },
+    { code: 'enuk', label: 'English UK' },
     { code: 'ja',   label: '日本語' }
 ]
 const schemes = [

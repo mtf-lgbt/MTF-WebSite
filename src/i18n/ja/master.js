@@ -1,11 +1,7 @@
-import home from './home.js'
-import friends from './friends.js'
 import blogs from './blogs.js'
 
 const ja = {
     routes: {
-        home,
-        friends,
         blogs
     },
     components: {

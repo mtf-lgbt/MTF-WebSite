@@ -17,7 +17,7 @@ const KEY_BANNER_HEIGHT = 'BannerHeight'
 const saved = Cookies.get(KEY_COLOR)
 export const BgColor = ref(/^#[0-9a-fA-F]{6}$/.test(saved) ? saved : '#3388bb')
 export const Schemes = ref(Cookies.get(KEY_SCHEMES) || 'auto')
-export const LANG = ref(Cookies.get(KEY_LANG) || 'zhcn')
+export const LANG = ref(Cookies.get(KEY_LANG) || '')
 export const CONTRAST = ref(Cookies.get(KEY_CONTRAST) || 'standard')
 export const BANNER_HEIGHT = ref(Cookies.get(KEY_BANNER_HEIGHT) || 'calc(100vh - 66px)')
 

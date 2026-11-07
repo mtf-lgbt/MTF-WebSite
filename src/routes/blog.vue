@@ -22,7 +22,7 @@
         </transition>
         -->
 
-        <m3e-content-pane class="article-pane">
+        <m3e-content-pane fadeUp="true" class="article-pane">
             <h1>{{ post ? post.title : route.params.title }}</h1>
             <div class="blog-meta" v-if="post">
                 <span class="meta-item">{{ t('routes.blogs.author') }} {{ post.author }}，</span>
@@ -37,7 +37,7 @@
     </div>
     <m3e-content-pane>
         <Giscus
-            repo="HosinoEJ/HosinoNeko-Blog"
+            repo="mtf-lgbt/MTF-WebSite"
             repoId="R_kgDOSKjMXg"
             category="message"
             categoryId="DIC_kwDOSKjMXs4C-AfD"

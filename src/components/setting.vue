@@ -93,7 +93,7 @@ import "@m3e/web/dialog";
 
 const { locale } = useI18n()
 
-locale.value = LANG.value
+//locale.value = LANG.value
 
 const langs = [
     { code: 'zhcn', label: '简体中文' },

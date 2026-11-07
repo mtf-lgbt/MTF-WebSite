@@ -1,3 +1,8 @@
+/*
+src/i18n/i18n.js
+这个文件用于配置和创建 Vue I18n 实例。它会根据用户的浏览器语言设置和 cookie 中保存的语言偏好，选择最合适的语言和地区变体。
+*/
+
 import { createI18n } from 'vue-i18n';
 import { LANG } from '@/utils/setting'//查看src/utils/setting.js，LANG是从cookie中获取的语言设置
 import enuk from './en-uk/master'

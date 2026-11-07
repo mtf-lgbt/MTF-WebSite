@@ -6,7 +6,7 @@ onMounted(() => {
 })
 </script>
 
-<m3e-content-pane fadeUp="true">
+<m3e-content-pane>
 
 ## 2年目の更新まであと62.2$
 

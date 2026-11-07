@@ -1,4 +1,4 @@
-<m3e-content-pane fadeUp="true">
+<m3e-content-pane>
 
 # 关于本站
 

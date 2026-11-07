@@ -13,21 +13,19 @@ body {
     sans-serif;
 }
 m3e-content-pane {
-    --m3e-content-pane-container-color: var(--md-sys-color-surface-container-lowest);
     padding: 10px;
 }
 m3e-card {
     padding: 10px;
+}
+m3e-callout {
+    margin: 10px 0;
 }
 m3e-theme {
     display: flex;
     flex-direction: column;
     flex: 1; /* 配合外层 #app 的 flex 撑满高度 */
     background-color: var(--md-sys-color-surface-container-high);
-    color: var(--md-sys-color-on-background);
-}
-m3e-callout {
-    margin: 10px 0;
 }
 
 

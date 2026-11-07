@@ -1,5 +1,5 @@
 <template>
-  <m3e-content-pane class="blog-container" fadeUp="true">
+  <m3e-content-pane class="blog-container">
     <div v-if="!isMobile" style="margin: 50px 0 20px 0;">
         <span class="" style="font-size: 2em; font-weight: bold;">
             {{ t('routes.blogs.menuView.recommend') }}

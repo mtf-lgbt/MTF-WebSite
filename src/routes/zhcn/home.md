@@ -6,7 +6,7 @@ onMounted(() => {
 })
 </script>
 
-<m3e-content-pane fadeUp="true">
+<m3e-content-pane>
 
 ## 距离第二年续费还差62.2$
 对跨性别者这么重要的一个域名，竟然只需要<b style="font-size: 1.2em;">62.2美元</b>！台下观众一片欢呼：**62.2$！62.2$！**

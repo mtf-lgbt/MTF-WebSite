@@ -7,7 +7,7 @@ onMounted(() => {
 })
 </script>
 
-<m3e-content-pane fadeUp="true">
+<m3e-content-pane>
 
 ## Only $62.2 Left Until the Second-Year Renewal!
 

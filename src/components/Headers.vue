@@ -49,44 +49,42 @@ onUnmounted(() => {
 <template>
     <div class="header">
         <m3e-nav-bar mode="auto">
-            
-            <transition
-                :name="scrollDirection === 'down' ? 'slide-up' : 'slide-down'"
-                mode="out-in"
-            >
-                <m3e-nav-item 
-                    v-if="topheadrer == true" 
-                    href="/"
-                >
-                    <m3e-icon slot="icon" name="home"></m3e-icon>
-                    {{ $t('components.header.home') }}
-                </m3e-nav-item>
-                <m3e-nav-item 
-                    v-else
-                    @click.prevent="scrollToTop"
-                >
-                    <m3e-icon slot="icon" name="arrow_upward"></m3e-icon>
-                    {{ $t('components.header.backToTop') }}
-                </m3e-nav-item>
-            </transition>
-            <m3e-nav-item href="/friends">
-                <m3e-icon slot="icon" name="group"></m3e-icon>
-                {{ $t('components.header.friends') }}
+        <transition :name="scrollDirection === 'down' ? 'slide-up' : 'slide-down'" mode="out-in">
+            <RouterLink to="/" custom v-slot="{ navigate }" v-if="topheadrer == true" key="home-link">
+            <m3e-nav-item @click="navigate">
+                <m3e-icon slot="icon" name="home"></m3e-icon>
+                {{ $t('components.header.home') }}
             </m3e-nav-item>
-            <m3e-nav-item href="/about">
-                <m3e-icon slot="icon" name="info"></m3e-icon>
-                {{ $t('components.header.about') }}
+            </RouterLink>
+            <m3e-nav-item v-else @click.prevent="scrollToTop" key="back-to-top">
+            <m3e-icon slot="icon" name="arrow_upward"></m3e-icon>
+            {{ $t('components.header.backToTop') }}
             </m3e-nav-item>
-            <m3e-nav-item href="/blog">
-                <m3e-icon slot="icon" name="article"></m3e-icon>
-                {{ $t('components.header.blogs') }}
+        </transition>
+        <RouterLink to="/friends" custom v-slot="{ navigate, href }">
+            <m3e-nav-item @click="navigate" :href="href">
+            <m3e-icon slot="icon" name="group"></m3e-icon>
+            {{ $t('components.header.friends') }}
             </m3e-nav-item>
-            <m3e-nav-item variant="filled">
-                <m3e-icon slot="icon" name="settings"></m3e-icon>
-                <m3e-dialog-trigger for="settingPage">
-                    {{ $t('components.header.setting') }}
-                </m3e-dialog-trigger>
+        </RouterLink>
+        <RouterLink to="/about" custom v-slot="{ navigate, href }">
+            <m3e-nav-item @click="navigate" :href="href">
+            <m3e-icon slot="icon" name="info"></m3e-icon>
+            {{ $t('components.header.about') }}
             </m3e-nav-item>
+        </RouterLink>
+        <RouterLink to="/blog" custom v-slot="{ navigate }">
+            <m3e-nav-item @click="navigate">
+            <m3e-icon slot="icon" name="article"></m3e-icon>
+            {{ $t('components.header.blogs') }}
+            </m3e-nav-item>
+        </RouterLink>
+        <m3e-nav-item variant="filled">
+            <m3e-icon slot="icon" name="settings"></m3e-icon>
+            <m3e-dialog-trigger for="settingPage">
+            {{ $t('components.header.setting') }}
+            </m3e-dialog-trigger>
+        </m3e-nav-item>
         </m3e-nav-bar>
     </div>
 </template>

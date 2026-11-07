@@ -21,7 +21,8 @@ const load = async (lang) => {
     comp.value = (await loader()).default
 }
 
-watch(locale, load, { immediate: true })
+//watch(locale, load, { immediate: true })
+watch([locale, () => props.page], ([l, p]) => load(l), { immediate: true })
 </script>
 
 <template>

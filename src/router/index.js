@@ -20,6 +20,18 @@ const routes = [
 const router = createRouter({
     history: createWebHistory(),
     routes,
+    scrollBehavior(to, from, savedPosition) {
+        if (savedPosition) return savedPosition;
+        if (to.hash) {
+            // to.hash 是编码形式，中文 id 必须 decode + getElementById
+            // querySelector 不认 '#%E5%AE%89...' 这种编码后的选择器
+            const id = decodeURIComponent(to.hash.slice(1));
+            const el = document.getElementById(id);
+            if (el) return { el, behavior: 'smooth', top: 100 };
+            return { top: 0 };
+        }
+        return { top: 0 };
+    }
 })
 
 export default router

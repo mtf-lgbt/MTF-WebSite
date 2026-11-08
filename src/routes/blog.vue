@@ -1,38 +1,25 @@
 <template>
-    <div @click="handleAnchorClick" :style="layoutStyle">
+    <m3e-callout variant="primary">
+        <p>{{ t('routes.blogs.urlWarning') }}</p>
+    </m3e-callout>
+    <div @click="handleAnchorClick" :style="layoutStyle" fadeUp="true">
         <!-- 侧边栏 TOC -->
-        <m3e-content-pane class="toc-sidebar" v-if="!isMobile && !isTablet">
+        <m3e-content-pane class="toc-sidebar" v-if="!isMobile && !isTablet" :key="html">
                 <a href="/blog">{{ t('routes.blogs.viewOtherBlogs') }}</a>
                 <m3e-toc for="article-content" max-depth="3">
                     <span>{{ t('routes.blogs.outLine') }}</span>
                 </m3e-toc>
         </m3e-content-pane>
-        <!--
-        <transition name="fade" mode="out-in">
-        <aside class="toc-sidebar div toc-mobile" v-if="isMobile" fadeUp="true">
-            <button class="toc-mobile-switch" @click="toggleMobileTOC">
-                <img src="/public/icon/menu.svg" style="width: 30px; height: 30px;" alt="Switch" />
-            </button>
-            <div v-if="mobileTOC_open" class="toc-content">
-                <m3e-toc for="article-content" max-depth="3">
-                    <span slot="overline">{{ t('routes.blogs.outLine') }}</span>
-                </m3e-toc>
-            </div>
-        </aside>
-        </transition>
-        -->
 
-        <m3e-content-pane fadeUp="true" class="article-pane">
+        <m3e-content-pane class="article-pane" fadeUp="true">
             <h1 v-if="!post?.postFetch">{{ post ? post.title : route.params.title }}</h1>
             <div class="blog-meta" v-if="post">
                 <span class="meta-item">{{ t('routes.blogs.author') }} {{ post.author }}，</span>
                 <span class="meta-item">{{ t('routes.blogs.releaseDate') }} {{ post.CreationDate }}，</span>
                 <span class="meta-item">{{ t('routes.blogs.language') }} {{ post.Language }}</span>
             </div>
-            <div class="markdown-body" id="article-content" v-html="html"></div>
-            <div class="comments-container">
-                
-            </div>
+            <div class="markdown-body" id="article-content" v-if="html" v-html="html"></div>
+            <div class="article-loading" v-else>LOADING……</div>
         </m3e-content-pane>
     </div>
     <m3e-content-pane>
@@ -56,7 +43,7 @@
 <script setup>
 import Giscus from '@giscus/vue';
 import { ref, onMounted, watch , computed } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import MarkdownIt from 'markdown-it'
 import anchor from 'markdown-it-anchor';
 import { fetchBlogData, getPostByFilename } from '../utils/blogData.js';
@@ -71,6 +58,7 @@ const layoutStyle = computed(() => ({
 }));
 
 const route = useRoute()
+const router = useRouter()
 const html = ref('')
 const md = new MarkdownIt({
     html: true,
@@ -86,30 +74,22 @@ const handleAnchorClick = (e) => {
     if (!link) return;
 
     const href = link.getAttribute('href');
-    
-    if (href && href.startsWith('#')) {
-        e.preventDefault(); 
+    if (!href || !href.startsWith('#')) return;
 
-        const targetId = decodeURIComponent(href.substring(1));
-        const targetElement = document.getElementById(targetId);
+    e.preventDefault();
 
-        if (targetElement) {
-            targetElement.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
+    const targetId = decodeURIComponent(href.substring(1));
+    const newHash = `#${encodeURIComponent(targetId)}`;
 
-            const currentFullHash = window.location.hash; 
-            
-            // 2. 找到路由路徑部分（去掉舊錨點的部分）
-            const basePath = currentFullHash.split('#')[1] || ''; // 拿到 "/blog/xxx"
-            const routePath = basePath.split('#')[0]; // 確保拿到純路徑部分
-            
-            const newHash = `#${routePath}#${encodeURIComponent(targetId)}`;
-            
-            window.history.replaceState(null, '', `${window.location.pathname}${newHash}`);
-        }
+    if (route.hash === newHash) {
+        document.getElementById(targetId)?.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+        return;
     }
+
+    router.replace({ hash: `#${targetId}` });
 };
 
 // 定義加載 Markdown 的函數
@@ -120,7 +100,7 @@ const loadMarkdown = async () => {
         const remoteUrl = post.value?.url
         if (!remoteUrl) {
             console.error('postFetch 为 true 但缺少 url 字段')
-            html.value = '<p>文章配置錯誤：缺少遠程地址</p>'
+            html.value = '<p>文章不存在或者 url 字段缺失</p>'
             return
         }
         try {

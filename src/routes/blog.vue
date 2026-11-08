@@ -23,7 +23,7 @@
         -->
 
         <m3e-content-pane fadeUp="true" class="article-pane">
-            <h1>{{ post ? post.title : route.params.title }}</h1>
+            <h1 v-if="!post?.postFetch">{{ post ? post.title : route.params.title }}</h1>
             <div class="blog-meta" v-if="post">
                 <span class="meta-item">{{ t('routes.blogs.author') }} {{ post.author }}，</span>
                 <span class="meta-item">{{ t('routes.blogs.releaseDate') }} {{ post.CreationDate }}，</span>
@@ -114,9 +114,32 @@ const handleAnchorClick = (e) => {
 
 // 定義加載 Markdown 的函數
 const loadMarkdown = async () => {
+    const filename = route.params.title  // 实为 filename
+
+    if (postFetch.value) {
+        const remoteUrl = post.value?.url
+        if (!remoteUrl) {
+            console.error('postFetch 为 true 但缺少 url 字段')
+            html.value = '<p>文章配置錯誤：缺少遠程地址</p>'
+            return
+        }
+        try {
+            const res = await fetch(remoteUrl, {
+                credentials: 'omit',
+                headers: { Accept: 'text/plain, text/markdown, */*' },
+            })
+            if (!res.ok) throw new Error(`HTTP ${res.status} for ${remoteUrl}`)
+            html.value = md.render(await res.text())
+        } catch (error) {
+            console.error('找不到該文章:', error)
+            html.value = '<p>文章不存在或路徑錯誤</p>'
+        }
+        return
+    }
+
+    // 默认：本地 import，filename 不带后缀
     try {
-        const title = route.params.title
-        const mdModule = await import(`../../Blog/${title}.md?raw`)
+        const mdModule = await import(`../../Blog/${filename}.md?raw`)
         html.value = md.render(mdModule.default)
     } catch (error) {
         console.error('找不到該文章:', error)
@@ -125,32 +148,27 @@ const loadMarkdown = async () => {
 }
 
 const post = ref(null);
+const postFetch = ref(false);
 
-onMounted(async () => {
-    const data = await fetchBlogData();
-    const filename = route.params.title;
-    const foundPost = getPostByFilename(data, filename);
+const loadPost = async () => {
+    const filename = route.params.title;   // 实为 filename
     document.title = filename;
-    
-    if (foundPost) {
-        post.value = foundPost;
-        await loadMarkdown(); 
-    } else {
-        console.error("找不到對應的文章數據");
-        await loadMarkdown(); 
+
+    try {
+        const data = await fetchBlogData();
+        post.value = getPostByFilename(data, filename) || null;
+        if (post.value?.title) document.title = post.value.title;
+    } catch (e) {
+        console.warn('加载文章元数据失败', e);
+        post.value = null;
     }
-});
 
-//onMounted(loadMarkdown);
-
-const mobileTOC_open = ref(false);
-const toggleMobileTOC = () => {
-    mobileTOC_open.value = !mobileTOC_open.value;
+    postFetch.value = !!post.value?.postFetch;
+    await loadMarkdown();
 };
 
-
-// 監聽路由變化
-watch(() => route.params.title, loadMarkdown)
+onMounted(loadPost);
+watch(() => route.params.title, loadPost);
 </script>
 <style scoped>
 h1{

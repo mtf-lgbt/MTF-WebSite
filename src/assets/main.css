@@ -26,6 +26,7 @@ m3e-theme {
     flex-direction: column;
     flex: 1; /* 配合外层 #app 的 flex 撑满高度 */
     background-color: var(--md-sys-color-surface-container-high);
+    color: var(--md-sys-color-on-background);
 }
 
 

@@ -1,17 +1,23 @@
 <script setup>
 import { useDeviceType } from '../utils/isMobie';
 import {useI18n} from 'vue-i18n'
+import { computed } from 'vue'
+import { Schemes } from '../utils/setting.js'
+console.log(Schemes.value)
 import "@m3e/web/avatar";
 const { t, locale } = useI18n()
 const { isMobile, isTablet } = useDeviceType();
+
+const isDark = computed(() => Schemes.value === 'dark')
+const isLight = computed(() => Schemes.value === 'light')
 </script>
 
 <template>
-    <footer>
+    <footer :class="{'dark': isDark, 'light': isLight}">
         <div class="footerLink">
             <a href="https://github.com/HosinoEJ"><img src="/icon/github.svg" /></a>
             <a href="mailto:contact@mtf.lgbt"><img src="/icon/gmail.svg" /></a>
-            <a href="https://t.me/@HosinoNeko_meow"><img src="/icon/telegram.svg" /></a>
+            <a href="https://t.me/HosinoNeko_meow"><img src="/icon/telegram.svg" /></a>
             <a href="/rss.xml"><img src="/icon/rss.svg" /></a>
             <a href="/"><img class="my-head" :src="$HeadImageX64px"/></a>
             <a href="https://space.bilibili.com/1140685131"><img src="/icon/bilibili.svg" /></a>
@@ -58,16 +64,21 @@ footer{
 }
 .footerLink img:hover{
     transform: scale(1.4);
-    
 }
-@media (prefers-color-scheme: dark) {
-    img:not(.my-head){
-        filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
-    }
-}
+
 .footerLink img:not(.my-head){
-    height: 2em;
+    height: 2em;        /* ← 补回这条 */
 }
+
+@media (prefers-color-scheme: dark) {
+  .footerLink img:not(.my-head) { filter: invert(100%); }
+}
+/* 强制 light：关掉反色（覆盖上面的媒体查询） */
+.light .footerLink img:not(.my-head) { filter: none; }
+/* 强制 dark：打开反色 */
+.dark .footerLink img:not(.my-head) { filter: invert(100%); }
+
+
 .my-head{
     border-radius: 50%;
     height: 3.5em;

@@ -9,7 +9,7 @@ onMounted(() => {
 
 <m3e-content-pane>
 
-## Only $62.2 Left Until the Second-Year Renewal!
+## only need $62.20 for the second year domain renewal
 
 A domain this important to the transgender community costs just **<b style="font-size: 1.2em;">$62.2</b>**! The audience erupts in cheers: **62.2 dollars! 62.2 dollars!**
 
@@ -17,7 +17,7 @@ But wait!
 
 Despite it being such a tiny amount of money, the site administrator has somehow spent the entire night unable to sleep!
 
-So, everyone, if you don't want this domain to end up in the hands of some absolute lunatic from the trans community, please, I'm begging you, spare me a few quid! (sobbing)
+So, everyone, if you don't want this domain to end up in the hands of some absolute lunatic from the trans community, please, I'm begging you, spare me a few bucks! (sobbing)
 
 <m3e-button variant="filled" href="/Spons">Support Me!</m3e-button>
 

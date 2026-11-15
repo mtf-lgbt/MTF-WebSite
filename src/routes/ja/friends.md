@@ -25,11 +25,11 @@
     alt="avatar"
     @error="(e) => e.target.src = 'https://avatars.githubusercontent.com/u/342978400?s=400&v=4'"
 >
-    
+
 <h3 slot="content">
     {{ cooperate.name }}
 </h3>
-    
+
 <p slot="content" v-if="cooperate.desc" class="desc">
     {{ cooperate.desc }}
 </p>
@@ -57,11 +57,11 @@
     alt="avatar"
     @error="(e) => e.target.src = 'https://avatars.githubusercontent.com/u/342978400?s=400&v=4'"
 >
-    
+
 <h3 slot="content">
     {{ friend.name }}
 </h3>
-    
+
 <p slot="content" v-if="friend.desc" class="desc">
     {{ friend.desc }}
 </p>
@@ -72,6 +72,7 @@
 <m3e-content-pane>
 
 ## 相互リンクの申請
+
 相互リンクをご希望の場合は、まずあなたのサイトに当サイトへのリンクを追加したうえで、メールをお送りください。
 
 - 名称：あなたのサイト名
@@ -81,6 +82,7 @@
 - 色：色の英語名、または16進数のカラーコード。例：<span style="color: white; background-color: #3388bb;">#3388bb</span>
 
 ## 当サイトをあなたの相互リンクに追加したい場合
+
 以下の内容をあなたのウェブページに追加してください：
 
 - 名称：WEBSITE of EVERY TRANSGENDER PEOPLE.

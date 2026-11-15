@@ -25,11 +25,11 @@
     alt="avatar"
     @error="(e) => e.target.src = 'https://avatars.githubusercontent.com/u/342978400?s=400&v=4'"
 >
-    
+
 <h3 slot="content">
     {{ cooperate.name }}
 </h3>
-    
+
 <p slot="content" v-if="cooperate.desc" class="desc">
     {{ cooperate.desc }}
 </p>
@@ -57,11 +57,11 @@
     alt="avatar"
     @error="(e) => e.target.src = 'https://avatars.githubusercontent.com/u/342978400?s=400&v=4'"
 >
-    
+
 <h3 slot="content">
     {{ friend.name }}
 </h3>
-    
+
 <p slot="content" v-if="friend.desc" class="desc">
     {{ friend.desc }}
 </p>
@@ -72,6 +72,7 @@
 <m3e-content-pane>
 
 ## 申请交换友链
+
 如果你也想交換鏈接。請在你的網站添加本站後，请向我发送[邮件]("mailto:contact@mtf.lgbt")
 
 - 名称：你的网站名称

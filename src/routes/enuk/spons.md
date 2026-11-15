@@ -7,7 +7,7 @@ Keep this domain alive
 There are several ways to contribute:
 
 - If you are using onshore RMB and can use Alipay or WeChat Pay, please go to [Afdian](https://afdian.com/a/mtf_lgbt)
-- If you are using cryptocurrency, please convert it all to BTC and transfer it to the account: ```bc1qdjy9qgkp8vna2jwys0nmvexgpjxsg2sk76827n```
+- If you are using cryptocurrency, please convert it all to BTC and transfer it to the account: `bc1qdjy9qgkp8vna2jwys0nmvexgpjxsg2sk76827n`
 
 <m3e-callout variant="error">
 <m3e-icon slot="icon" name="info"></m3e-icon>

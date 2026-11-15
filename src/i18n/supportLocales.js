@@ -11,13 +11,9 @@ src/i18n/supportLocales.js
 */
 
 const SUPPORT_LOCALES = {
-    zh:[
-        'cn'
-    ],
-    en: [
-        'uk'
-    ],
-    ja:[]
+	zh: ['cn'],
+	en: ['uk'],
+	ja: [],
 }
 
 export default SUPPORT_LOCALES

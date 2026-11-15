@@ -25,11 +25,11 @@ I don't know what purpose it serves—perhaps it's simply so that people won't f
     alt="avatar"
     @error="(e) => e.target.src = 'https://avatars.githubusercontent.com/u/342978400?s=400&v=4'"
 >
-    
+
 <h3 slot="content">
     {{ cooperate.name }}
 </h3>
-    
+
 <p slot="content" v-if="cooperate.desc" class="desc">
     {{ cooperate.desc }}
 </p>
@@ -57,11 +57,11 @@ I don't know what purpose it serves—perhaps it's simply so that people won't f
     alt="avatar"
     @error="(e) => e.target.src = 'https://avatars.githubusercontent.com/u/342978400?s=400&v=4'"
 >
-    
+
 <h3 slot="content">
     {{ friend.name }}
 </h3>
-    
+
 <p slot="content" v-if="friend.desc" class="desc">
     {{ friend.desc }}
 </p>
@@ -70,7 +70,6 @@ I don't know what purpose it serves—perhaps it's simply so that people won't f
 </m3e-content-pane>
 
 <m3e-content-pane>
-
 
 ## Partnership Applications
 

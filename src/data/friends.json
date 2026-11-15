@@ -1,66 +1,66 @@
 {
-  "friends": [
-    {
-      "name": "🍀🍥Smirnova🍥🍀",
-      "url": "https://mahiro.uk/",
-      "avatar": "https://avatars.githubusercontent.com/u/246650524?v=4",
-      "desc": "An undergraduate student from China.",
-      "color": "#FF0000"
-    },
-    {
-      "avatar": "https://typezhi.top/static/img/favicon.ico",
-      "color":"#3388bb",
-      "name": "知式🍥🍭🥑🍰",
-      "desc": "一个mtf的简介网站啦",
-      "url": "https://typezhi.top/"
-    },
-    {
-      "avatar": "https://gh.sbchild.top/avatar.jpg",
-      "color":"#ffaa00",
-      "name": "色妹妹的裙底",
-      "desc": "底裤被掀了，现在只剩一条随风飘荡的长裙",
-      "url": "https://gh.sbchild.top/"
-    },
-    {
-      "avatar": "https://chiyu.it/images/logo/logo.webp",
-      "color":"#ff6600",
-      "name": "池魚小栈",
-      "desc": "跨过晨昏线，便是永夜。",
-      "url": "https://chiyu.it/"
-    },
-    {
-      "name": "KiraEqual",
-      "url": "https://kiramyao.com",
-      "avatar": "https://kiramyao.com/pic/logo/Logo.png",
-      "desc": "中国跨性别群体处境与故事收录",
-      "color": "#3388bb"
-    },
-    {
-      "name": "枫莹の小窝",
-      "url": "https://blog.fengying.xin/",
-      "avatar": "https://image.fengying.xin/Image%20hosting/%E6%96%AF%E5%8D%A1%E8%92%82%E5%A4%B4%E5%83%8Fdart.png",
-      "desc": "枫莹的双语个人博客、技术笔记与项目展示站点",
-      "color": "#89CFF0"
-    },
-    {
-      "url": "https://www.yukinon.cc/",
-      "name": "ユキの隠れ家",
-      "desc": "人間になりたいですわ。",
-      "avatar": "https://www.yukinon.cc/images/avatar.avif"
-    },
-    {
-      "name": "枫书の小站",
-      "url": "https://blog.sfsa.mrgzs.top/",
-      "avatar": "https://q1.qlogo.cn/g?b=qq&nk=3593853319&s=640",
-      "desc": "做伟大事情的唯一方法就是热爱你所做的事",
-      "color": "#3388bb"
-    },
-    {
-      "name": "Nomanda-Creation",
-      "url": "https://nomanda-creation.github.io/",
-      "avatar": "https://nomanda-creation.github.io/img/avatar.jpg",
-      "desc": "跨性别相关信息介绍",
-      "color": "#3388bb"
-    }
-  ]
+	"friends": [
+		{
+			"name": "🍀🍥Smirnova🍥🍀",
+			"url": "https://mahiro.uk/",
+			"avatar": "https://avatars.githubusercontent.com/u/246650524?v=4",
+			"desc": "An undergraduate student from China.",
+			"color": "#FF0000"
+		},
+		{
+			"avatar": "https://typezhi.top/static/img/favicon.ico",
+			"color": "#3388bb",
+			"name": "知式🍥🍭🥑🍰",
+			"desc": "一个mtf的简介网站啦",
+			"url": "https://typezhi.top/"
+		},
+		{
+			"avatar": "https://gh.sbchild.top/avatar.jpg",
+			"color": "#ffaa00",
+			"name": "色妹妹的裙底",
+			"desc": "底裤被掀了，现在只剩一条随风飘荡的长裙",
+			"url": "https://gh.sbchild.top/"
+		},
+		{
+			"avatar": "https://chiyu.it/images/logo/logo.webp",
+			"color": "#ff6600",
+			"name": "池魚小栈",
+			"desc": "跨过晨昏线，便是永夜。",
+			"url": "https://chiyu.it/"
+		},
+		{
+			"name": "KiraEqual",
+			"url": "https://kiramyao.com",
+			"avatar": "https://kiramyao.com/pic/logo/Logo.png",
+			"desc": "中国跨性别群体处境与故事收录",
+			"color": "#3388bb"
+		},
+		{
+			"name": "枫莹の小窝",
+			"url": "https://blog.fengying.xin/",
+			"avatar": "https://image.fengying.xin/Image%20hosting/%E6%96%AF%E5%8D%A1%E8%92%82%E5%A4%B4%E5%83%8Fdart.png",
+			"desc": "枫莹的双语个人博客、技术笔记与项目展示站点",
+			"color": "#89CFF0"
+		},
+		{
+			"url": "https://www.yukinon.cc/",
+			"name": "ユキの隠れ家",
+			"desc": "人間になりたいですわ。",
+			"avatar": "https://www.yukinon.cc/images/avatar.avif"
+		},
+		{
+			"name": "枫书の小站",
+			"url": "https://blog.sfsa.mrgzs.top/",
+			"avatar": "https://q1.qlogo.cn/g?b=qq&nk=3593853319&s=640",
+			"desc": "做伟大事情的唯一方法就是热爱你所做的事",
+			"color": "#3388bb"
+		},
+		{
+			"name": "Nomanda-Creation",
+			"url": "https://nomanda-creation.github.io/",
+			"avatar": "https://nomanda-creation.github.io/img/avatar.jpg",
+			"desc": "跨性别相关信息介绍",
+			"color": "#3388bb"
+		}
+	]
 }

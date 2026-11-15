@@ -7,7 +7,7 @@
 寄付の方法は以下の通りです：
 
 - オンショア人民元を使用し、AlipayまたはWeChat Payが利用可能な方は[愛発電](https://afdian.com/a/mtf_lgbt)へお進みください
-- 暗号通貨を使用する場合は、すべてBTCに換金し、以下のアカウントに送金してください：```bc1qdjy9qgkp8vna2jwys0nmvexgpjxsg2sk76827n```
+- 暗号通貨を使用する場合は、すべてBTCに換金し、以下のアカウントに送金してください：`bc1qdjy9qgkp8vna2jwys0nmvexgpjxsg2sk76827n`
 
 <m3e-callout variant="error">
 <m3e-icon slot="icon" name="info"></m3e-icon>

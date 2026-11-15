@@ -8,6 +8,7 @@ const zhcn = {
         header: {
             home: '主页',
             backToTop: '回到顶部',
+            spons: '捐助',
             friends: '友链',
             about: '关于本站',
             blogs: '文章',

@@ -9,6 +9,7 @@ const enuk = {
         header: {
             home: 'Home',
             backToTop: 'Back to Top',
+            spons: 'Donate',
             friends: 'Friends',
             about: 'About This Site',
             blogs: 'Blog Posts',

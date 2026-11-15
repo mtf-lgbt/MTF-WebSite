@@ -61,6 +61,12 @@ onUnmounted(() => {
             {{ $t('components.header.backToTop') }}
             </m3e-nav-item>
         </transition>
+        <RouterLink to="/Spons" custom v-slot="{ navigate, href }">
+            <m3e-nav-item @click="navigate" :href="href">
+            <m3e-icon slot="icon" name="volunteer_activism"></m3e-icon>
+            {{ $t('components.header.spons') }}
+            </m3e-nav-item>
+        </RouterLink>
         <RouterLink to="/friends" custom v-slot="{ navigate, href }">
             <m3e-nav-item @click="navigate" :href="href">
             <m3e-icon slot="icon" name="group"></m3e-icon>

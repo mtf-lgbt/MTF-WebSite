@@ -8,6 +8,7 @@ const ja = {
         header: {
             home: 'ホームページ',
             backToTop: 'トップに戻る',
+            spons: '寄付',
             friends: '友達リンク',
             about: 'サイトについて',
             blogs: '文章',

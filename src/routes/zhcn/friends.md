@@ -42,7 +42,7 @@
 <m3e-card actionable
     v-for="friend in friendsData.friends" 
     :key="friend.url" 
-    :href="friend.url" 
+    :href="friend.url"
     target="_blank" 
     :style="{ 
         '--m3e-filled-card-container-color': friend.color ?

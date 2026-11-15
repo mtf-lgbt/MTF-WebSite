@@ -25,7 +25,7 @@ onMounted(() => {
         document.title = 'Develop | MTF.LGBT'
     }
     if (import.meta.env.PROD) {
-        document.title = `MTF.LGBT | ${routerName}`
+        document.title = `MTF.LGBT`
     }
 });
 

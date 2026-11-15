@@ -1,22 +1,24 @@
-
 <m3e-content-pane>
 
-# Donate
+# Donations
 
-Help keep this domain alive.
+Keep this domain alive
+
+There are several ways to contribute:
+
+- If you are using onshore RMB and can use Alipay or WeChat Pay, please go to [Afdian](https://afdian.com/a/mtf_lgbt)
+- If you are using cryptocurrency, please convert it all to BTC and transfer it to the account: ```bc1qdjy9qgkp8vna2jwys0nmvexgpjxsg2sk76827n```
 
 <m3e-callout variant="error">
-    <m3e-icon slot="icon" name="info"></m3e-icon>
-    <span slot="label">Hold on! I haven't set up a donation channel yet!</span>
-    Goo goo gaa gaa!
+<m3e-icon slot="icon" name="info"></m3e-icon>
+<span slot="label">Warning ⚠️</span>
+Refunds are not supported for cryptocurrency payments under any circumstances
 </m3e-callout>
 
-I'm sure none of us, myself included, would want a domain that belongs to our community to fall into the wrong hands and be used for malicious purposes.
+Offshore RMB, Hong Kong dollars and other national currencies are not currently accepted
 
-Keeping this domain running requires an annual payment, and it is no small expense. Unfortunately, this is more than I can afford on my own, and this website is unlikely to generate much revenue through other means. That's why I need your support and donations to keep this website alive.
+> btw, I've recently been preparing a Hong Kong account, and Japanese yen may be supported later on, depending on the circumstances.
 
-As a token of my gratitude, you are welcome to leave a wish in the donation note. If it is something within the site administrator's capabilities, I'll do my best to make it happen.
-
-However, if you'd like your wish to be fulfilled, please remember to leave your contact details so that I can get in touch with you.
+As a token of appreciation, you can write your wish in the remarks. **If it is within the webmaster's ability**, the webmaster will do their best to fulfil it. However, since contact will be needed, you will need to leave your contact details for this to be possible.
 
 </m3e-content-pane>

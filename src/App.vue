@@ -7,7 +7,7 @@ import statusForRt from './components/statusForRt.vue'
 import Banne from './components/Banne.vue';
 import setting from './components/setting.vue';
 
-import { computed } from 'vue';
+import { computed, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { useDeviceType } from './utils/isMobie';
 import { BgColor, Schemes, CONTRAST } from './utils/setting.js'//设置项目
@@ -19,6 +19,15 @@ const mainStyle = computed(() => ({
     flexDirection: (isMobile.value || isTablet.value) ? 'column' : 'row',
 }));
 const queryType = computed(() => route.query.mdOnly === 'true');//是否是文章只读模式
+
+onMounted(() => {
+    if (import.meta.env.DEV) {
+        document.title = 'Develop | MTF.LGBT'
+    }
+    if (import.meta.env.PROD) {
+        document.title = `MTF.LGBT | ${routerName}`
+    }
+});
 
 </script>
 

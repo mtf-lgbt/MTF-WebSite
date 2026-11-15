@@ -1,3 +1,5 @@
+// src/router/index.js
+
 import { createRouter, createWebHistory } from 'vue-router'
 
 import LocalizedPage from '@/routes/LocalizedPage.vue';

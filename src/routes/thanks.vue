@@ -1,6 +1,10 @@
 <script setup>
 import { useAfadianData } from '@/utils/getAfadianData'
 import { computed } from 'vue'
+import { useAfadianAllSumAmount } from '@/utils/getAfadianAllSumAmount'
+import { useI18n } from 'vue-i18n';//国际化
+const { t } = useI18n();
+const { totalSumAmount } = useAfadianAllSumAmount()
 const { data, error, loading } = useAfadianData('sponsor')
 
 const sortedList = computed(() => {
@@ -10,10 +14,19 @@ const sortedList = computed(() => {
 </script>
 
 <template>
-    <div class="links-grid">
-        <p v-if="loading">加载中…</p>
-        <p v-else-if="error">加载失败：{{ error.message }}</p>
-        <div v-else>
+    <m3e-content-pane>
+        <h1>{{ t('routes.spons.title') }}</h1>
+        <p>{{ t('routes.spons.description') }}</p>
+        <m3e-callout variant="tertiary">
+            <m3e-icon slot="icon" name="info"></m3e-icon>
+            <span slot="label">Tips:</span>
+            <p>{{ t('routes.spons.tips') }}</p>
+        </m3e-callout>
+        <b style="font-size: 1.1em;">{{ t('routes.spons.totalSumAmount') }}<b style="font-size: 1.2em; color: #3388bb;">{{ totalSumAmount }}CNY</b></b>
+        <p v-if="loading">{{ t('routes.spons.status.loading') }}</p>
+        <p v-else-if="error">{{ t('routes.spons.status.loadError') }}{{ error.message }}</p>
+        <div class="links-grid" v-else>
+            
             <!--<div>{{ data?.data?.list?.length || 0 }} 个订单</div>-->
             <m3e-card actionable
                 v-for="o in sortedList" 
@@ -38,7 +51,7 @@ const sortedList = computed(() => {
                 -->
             </m3e-card>
         </div>
-    </div>
+    </m3e-content-pane>
 </template>
 <style scoped>
 /* 網格系統 */

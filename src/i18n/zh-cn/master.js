@@ -1,8 +1,10 @@
 import blogs from './blogs.js'
+import spons from './spons.js'
 
 const zhcn = {
     routes: {
-        blogs
+        blogs,
+        spons
     },
     components: {
         header: {

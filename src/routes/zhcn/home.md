@@ -1,14 +1,18 @@
 <script setup>
-import { onMounted } from 'vue'
+import { onMounted,computed } from 'vue'
+import { useAfadianAllSumAmount } from '@/utils/getAfadianAllSumAmount'
 
-onMounted(() => {
-    document.title = 'MTF.LGBT'
-})
+const { totalSumAmount } = useAfadianAllSumAmount()
+
+const Completeness = computed(() => (totalSumAmount.value / 414.95) * 100)
 </script>
 
 <m3e-content-pane>
 
-## 距离第二年续费还差62.2$
+## 距离第二年续费还差{{414.95 - totalSumAmount}}CNY!!!
+
+第二年续费目标已完成{{ Completeness.toFixed(2) }}%
+<m3e-linear-progress-indicator variant="wavy" :value="Completeness"></m3e-linear-progress-indicator>
 
 对跨性别者这么重要的一个域名，竟然只需要<b style="font-size: 1.2em;">62.2美元</b>！台下观众一片欢呼：**62.2$！62.2$！**
 
